@@ -243,6 +243,293 @@
            <set>ItemIsUserCheckable|ItemIsEnabled</set>
           </property>
          </item>
+         
+<item>
+ <property name="text">
+  <string>tls://145.100.185.15:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://145.100.185.16:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://145.100.185.17:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://145.100.185.18:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://185.49.141.37:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://89.233.43.71:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://158.64.1.29:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://176.103.130.130:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://176.103.130.131:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://176.103.130.132:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://176.103.130.134:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://199.58.81.218:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://51.15.70.167:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://146.185.167.43:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://81.187.221.24:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://94.130.110.185:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://94.130.110.178:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://139.59.51.46:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://80.67.188.188:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://89.234.186.112:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://200.1.123.46:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://93.177.65.183:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://184.105.193.78:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://[2001:610:1:40ba:145:100:185:15]:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://[2001:610:1:40ba:145:100:185:16]:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
+<item>
+ <property name="text">
+  <string>tls://[2a04:b900:0:100::38]:853</string>
+ </property>
+ <property name="checkState">
+  <enum>Checked</enum>
+ </property>
+ <property name="flags">
+  <set>ItemIsUserCheckable|ItemIsEnabled</set>
+ </property>
+</item>
         </widget>
        </item>
        <item row="14" column="0">
