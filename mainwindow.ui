@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>869</width>
+    <height>676</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>CoreDNS GUI</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>corednsgui.png</normaloff>corednsgui.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Options</string>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>China DNS Server List</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QListWidget" name="listChinaDNSServers">
+         <item>
+          <property name="text">
+           <string>udp://114.114.114.114:53</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>udp://114.114.115.115:53</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>udp://223.5.5.5:53</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>udp://223.6.6.6:53</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>udp://180.76.76.76:53</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>udp://119.29.29.29:53</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>udp://1.2.4.8:53</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Custom China DNS Servers</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="edtChinaDNSServers">
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>114.114.114.114 223.5.5.5 119.29.29.29 separated by whitespace</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Abroad DNS Server List</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QListWidget" name="listAbroadDNSServer">
+         <item>
+          <property name="text">
+           <string>udp://208.67.222.222:5353</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>udp://208.67.222.222:443</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>udp://208.67.220.220:5353</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>udp://208.67.220.220:443</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tls://8.8.8.8:853</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tls://8.8.4.4:853</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tls://1.1.1.1:853</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tls://1.0.0.1:853</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tls://9.9.9.9:853</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tls://9.9.9.10:853</string>
+          </property>
+          <property name="checkState">
+           <enum>Checked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Redis</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="1">
+        <widget class="QLineEdit" name="edtRedis">
+         <property name="placeholderText">
+          <string>127.0.0.1:6379, leave blank if don't need redis cache</string>
+         </property>
+        </widget>
+       </item>
+       <item row="16" column="1">
+        <widget class="QCheckBox" name="cbLogs">
+         <property name="text">
+          <string>Enabled</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="1">
+        <widget class="QCheckBox" name="cbHealthCheck">
+         <property name="text">
+          <string>Enabled</string>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="1">
+        <widget class="QCheckBox" name="cbConfigurationHotReload">
+         <property name="text">
+          <string>Enabled</string>
+         </property>
+        </widget>
+       </item>
+       <item row="17" column="1">
+        <widget class="QCheckBox" name="cbSystemHostFile">
+         <property name="text">
+          <string>Enabled</string>
+         </property>
+        </widget>
+       </item>
+       <item row="18" column="1">
+        <widget class="QCheckBox" name="cbTTLCache">
+         <property name="text">
+          <string>Enabled</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Health Check</string>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Configuration Hot Reload</string>
+         </property>
+        </widget>
+       </item>
+       <item row="16" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Logs</string>
+         </property>
+        </widget>
+       </item>
+       <item row="17" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>System Host File</string>
+         </property>
+        </widget>
+       </item>
+       <item row="18" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>TTL Cache</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Custom Abroad DNS Servers</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="edtAbroadDNSServers">
+         <property name="placeholderText">
+          <string>8.8.8.8 1.1.1.1 separated by whitespace</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Ads Plugin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="cbAdsPlugin">
+         <property name="text">
+          <string>Enabled</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>Ads Policy</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QRadioButton" name="rbDefaultAdsPolicy">
+           <property name="text">
+            <string>Default</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="rbStrictAdsPolicy">
+           <property name="text">
+            <string>Strict</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_13">
+         <property name="text">
+          <string>Ads List Store</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QCheckBox" name="cbAdsListStore">
+         <property name="text">
+          <string>Enabled</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="label_14">
+         <property name="text">
+          <string>Custom Ads Black List</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <widget class="QLineEdit" name="edtAdsBlackList"/>
+       </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="label_15">
+         <property name="text">
+          <string>Custom Ads White List</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1">
+        <widget class="QLineEdit" name="edtAdsWhiteList"/>
+       </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="label_16">
+         <property name="text">
+          <string>Ads Auto Update Interval</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="QLineEdit" name="edtAdsAutoUpdateInterval">
+         <property name="placeholderText">
+          <string>24h,60m etc, valid time units are &quot;ns&quot;, &quot;us&quot; (or &quot;µs&quot;), &quot;ms&quot;, &quot;s&quot;, &quot;m&quot;, &quot;h&quot;. </string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>Logs</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QTextEdit" name="edtLogs">
+         <property name="undoRedoEnabled">
+          <bool>false</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>869</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_Action">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionExportCorefile"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionHomepage"/>
+    <addaction name="actionDonate"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menu_Action_2">
+    <property name="title">
+     <string>&amp;Action</string>
+    </property>
+    <addaction name="actionStartCoreDNS"/>
+    <addaction name="actionStopCoreDNS"/>
+   </widget>
+   <addaction name="menu_Action"/>
+   <addaction name="menu_Action_2"/>
+   <addaction name="menu_Help"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionStartCoreDNS"/>
+   <addaction name="actionStopCoreDNS"/>
+  </widget>
+  <action name="actionExportCorefile">
+   <property name="text">
+    <string>Export Corefile...</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionHomepage">
+   <property name="text">
+    <string>&amp;Homepage...</string>
+   </property>
+  </action>
+  <action name="actionDonate">
+   <property name="text">
+    <string>&amp;Donate...</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About...</string>
+   </property>
+  </action>
+  <action name="actionStartCoreDNS">
+   <property name="icon">
+    <iconset resource="corednsgui.qrc">
+     <normaloff>:/res/start.png</normaloff>:/res/start.png</iconset>
+   </property>
+   <property name="text">
+    <string>Start CoreDNS</string>
+   </property>
+  </action>
+  <action name="actionStopCoreDNS">
+   <property name="icon">
+    <iconset resource="corednsgui.qrc">
+     <normaloff>:/res/stop.png</normaloff>:/res/stop.png</iconset>
+   </property>
+   <property name="text">
+    <string>Stop CoreDNS</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="corednsgui.qrc"/>
+ </resources>
+ <connections/>
+</ui>
