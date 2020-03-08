@@ -5,5 +5,7 @@
         <file>corednsgui.png</file>
         <file>res/alipay.jpg</file>
         <file>res/wepay.jpg</file>
+        <file>res/donate.png</file>
+        <file>res/export.png</file>
     </qresource>
 </RCC>

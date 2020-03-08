@@ -944,10 +944,19 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionExportCorefile"/>
+   <addaction name="separator"/>
    <addaction name="actionStartCoreDNS"/>
    <addaction name="actionStopCoreDNS"/>
+   <addaction name="separator"/>
+   <addaction name="actionDonate"/>
+   <addaction name="actionAbout"/>
   </widget>
   <action name="actionExportCorefile">
+   <property name="icon">
+    <iconset resource="corednsgui.qrc">
+     <normaloff>:/res/export.png</normaloff>:/res/export.png</iconset>
+   </property>
    <property name="text">
     <string>Export Corefile...</string>
    </property>
@@ -963,11 +972,19 @@
    </property>
   </action>
   <action name="actionDonate">
+   <property name="icon">
+    <iconset resource="corednsgui.qrc">
+     <normaloff>:/res/donate.png</normaloff>:/res/donate.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Donate...</string>
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="corednsgui.qrc">
+     <normaloff>:/corednsgui.png</normaloff>:/corednsgui.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;About...</string>
    </property>
