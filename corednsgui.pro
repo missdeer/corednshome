@@ -16,20 +16,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    $$PWD/main.cpp \
+    $$PWD/mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    $$PWD/mainwindow.h
 
 FORMS += \
-    mainwindow.ui
+    $$PWD/mainwindow.ui
 
-RC_FILE += \
-    corednsgui.rc
+win32: RC_FILE += $$PWD/corednsgui.rc
 
 TRANSLATIONS += \
-    corednsgui_zh_CN.ts
+    $$PWD/corednsgui_zh_CN.ts
 
 RESOURCES += \
-    corednsgui.qrc
+    $$PWD/corednsgui.qrc
