@@ -26,7 +26,7 @@ HEADERS += \
 
 FORMS += \
     $$PWD/mainwindow.ui \
-    donatedialog.ui
+    $$PWD/donatedialog.ui
 
 win32: RC_FILE += $$PWD/corednsgui.rc
 
