@@ -215,6 +215,111 @@
          </item>
          <item>
           <property name="text">
+           <string>tcp://208.67.222.222:5353</string>
+          </property>
+          <property name="toolTip">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="statusTip">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="whatsThis">
+           <string/>
+          </property>
+          <property name="checkState">
+           <enum>Unchecked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tcp://208.67.222.222:443</string>
+          </property>
+          <property name="toolTip">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="whatsThis">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="checkState">
+           <enum>Unchecked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tcp://208.67.222.222:53</string>
+          </property>
+          <property name="toolTip">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="whatsThis">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="checkState">
+           <enum>Unchecked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tcp://208.67.220.220:5353</string>
+          </property>
+          <property name="toolTip">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="whatsThis">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="checkState">
+           <enum>Unchecked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tcp://208.67.220.220:443</string>
+          </property>
+          <property name="toolTip">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="whatsThis">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="checkState">
+           <enum>Unchecked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tcp://208.67.220.220:53</string>
+          </property>
+          <property name="toolTip">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="whatsThis">
+           <string extracomment="OpenDNS"/>
+          </property>
+          <property name="checkState">
+           <enum>Unchecked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>tls://8.8.8.8:853</string>
           </property>
           <property name="checkState">
@@ -227,6 +332,28 @@
          <item>
           <property name="text">
            <string>tls://8.8.4.4:853</string>
+          </property>
+          <property name="checkState">
+           <enum>Unchecked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tcp://8.8.8.8:53</string>
+          </property>
+          <property name="checkState">
+           <enum>Unchecked</enum>
+          </property>
+          <property name="flags">
+           <set>ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tcp://8.8.4.4:53</string>
           </property>
           <property name="checkState">
            <enum>Unchecked</enum>
@@ -279,6 +406,50 @@
            <set>ItemIsUserCheckable|ItemIsEnabled</set>
           </property>
          </item>
+         <item>
+                   <property name="text">
+                    <string>tcp://1.1.1.1:53</string>
+                   </property>
+                   <property name="checkState">
+                    <enum>Unchecked</enum>
+                   </property>
+                   <property name="flags">
+                    <set>ItemIsUserCheckable|ItemIsEnabled</set>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>tcp://1.0.0.1:53</string>
+                   </property>
+                   <property name="checkState">
+                    <enum>Unchecked</enum>
+                   </property>
+                   <property name="flags">
+                    <set>ItemIsUserCheckable|ItemIsEnabled</set>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>tcp://9.9.9.9:53</string>
+                   </property>
+                   <property name="checkState">
+                    <enum>Unchecked</enum>
+                   </property>
+                   <property name="flags">
+                    <set>ItemIsUserCheckable|ItemIsEnabled</set>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>tcp://9.9.9.10:53</string>
+                   </property>
+                   <property name="checkState">
+                    <enum>Unchecked</enum>
+                   </property>
+                   <property name="flags">
+                    <set>ItemIsUserCheckable|ItemIsEnabled</set>
+                   </property>
+                  </item>
          <item>
           <property name="text">
            <string>tls://145.100.185.15:853</string>
