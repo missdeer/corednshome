@@ -151,7 +151,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="314"/>
-        <location filename="mainwindow.ui" line="439"/>
+        <location filename="mainwindow.ui" line="453"/>
         <source>Logs</source>
         <translation>日志</translation>
     </message>
@@ -221,57 +221,67 @@
         <translation>24h,60m等，可用的时间单位有&quot;ns&quot;, &quot;us&quot; (或 &quot;µs&quot;), &quot;ms&quot;, &quot;s&quot;, &quot;m&quot;, &quot;h&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="468"/>
+        <location filename="mainwindow.ui" line="436"/>
+        <source>Listen Address</source>
+        <translation>监听地址</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="443"/>
+        <source>:53 or 127.0.0.1:53 or 192.168.1.1:53 etc</source>
+        <translation>:53 或 127.0.0.1:53 或 192.168.1.1:53 等</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="482"/>
         <source>&amp;File</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="476"/>
+        <location filename="mainwindow.ui" line="490"/>
         <source>&amp;Help</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="484"/>
+        <location filename="mainwindow.ui" line="498"/>
         <source>&amp;Action</source>
         <translation>操作</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="496"/>
+        <location filename="mainwindow.ui" line="510"/>
         <source>toolBar</source>
         <translation>工具栏</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="509"/>
+        <location filename="mainwindow.ui" line="523"/>
         <source>Export Corefile...</source>
         <translation>导出Corefile...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="514"/>
+        <location filename="mainwindow.ui" line="528"/>
         <source>Exit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="519"/>
+        <location filename="mainwindow.ui" line="533"/>
         <source>&amp;Homepage...</source>
         <translation>主页...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="524"/>
+        <location filename="mainwindow.ui" line="538"/>
         <source>&amp;Donate...</source>
         <translation>捐赠...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="529"/>
+        <location filename="mainwindow.ui" line="543"/>
         <source>&amp;About...</source>
         <translation>关于...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="538"/>
+        <location filename="mainwindow.ui" line="552"/>
         <source>Start CoreDNS</source>
         <translation>启动CoreDNS</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="547"/>
+        <location filename="mainwindow.ui" line="561"/>
         <source>Stop CoreDNS</source>
         <translation>停止CoreDNS</translation>
     </message>
@@ -284,6 +294,14 @@
         <location filename="mainwindow.cpp" line="63"/>
         <source>GUI configuration tool for custom build CoreDNS.&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</source>
         <translation>用于自行编译的CoreDNS的图形用户界面的配置工具。&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="main.cpp" line="11"/>
+        <source>CoreDNS GUI</source>
+        <translation>CoreDNS图形用户界面</translation>
     </message>
 </context>
 </TS>

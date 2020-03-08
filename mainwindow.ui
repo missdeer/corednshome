@@ -25,14 +25,14 @@
        <string>Options</string>
       </property>
       <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="0">
+       <item row="1" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
           <string>China DNS Server List</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
+       <item row="1" column="1">
         <widget class="QListWidget" name="listChinaDNSServers">
          <item>
           <property name="text">
@@ -113,14 +113,14 @@
          </item>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Custom China DNS Servers</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="3" column="1">
         <widget class="QLineEdit" name="edtChinaDNSServers">
          <property name="inputMask">
           <string/>
@@ -133,14 +133,14 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
           <string>Abroad DNS Server List</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="4" column="1">
         <widget class="QListWidget" name="listAbroadDNSServer">
          <item>
           <property name="text">
@@ -245,126 +245,126 @@
          </item>
         </widget>
        </item>
-       <item row="13" column="0">
+       <item row="14" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>Redis</string>
          </property>
         </widget>
        </item>
-       <item row="13" column="1">
+       <item row="14" column="1">
         <widget class="QLineEdit" name="edtRedis">
          <property name="placeholderText">
           <string>127.0.0.1:6379, leave blank if don't need redis cache</string>
          </property>
         </widget>
        </item>
-       <item row="16" column="1">
+       <item row="17" column="1">
         <widget class="QCheckBox" name="cbLogs">
          <property name="text">
           <string>Enabled</string>
          </property>
         </widget>
        </item>
-       <item row="14" column="1">
+       <item row="15" column="1">
         <widget class="QCheckBox" name="cbHealthCheck">
          <property name="text">
           <string>Enabled</string>
          </property>
         </widget>
        </item>
-       <item row="15" column="1">
+       <item row="16" column="1">
         <widget class="QCheckBox" name="cbConfigurationHotReload">
          <property name="text">
           <string>Enabled</string>
          </property>
         </widget>
        </item>
-       <item row="17" column="1">
+       <item row="18" column="1">
         <widget class="QCheckBox" name="cbSystemHostFile">
          <property name="text">
           <string>Enabled</string>
          </property>
         </widget>
        </item>
-       <item row="18" column="1">
+       <item row="19" column="1">
         <widget class="QCheckBox" name="cbTTLCache">
          <property name="text">
           <string>Enabled</string>
          </property>
         </widget>
        </item>
-       <item row="14" column="0">
+       <item row="15" column="0">
         <widget class="QLabel" name="label_7">
          <property name="text">
           <string>Health Check</string>
          </property>
         </widget>
        </item>
-       <item row="15" column="0">
+       <item row="16" column="0">
         <widget class="QLabel" name="label_8">
          <property name="text">
           <string>Configuration Hot Reload</string>
          </property>
         </widget>
        </item>
-       <item row="16" column="0">
+       <item row="17" column="0">
         <widget class="QLabel" name="label_9">
          <property name="text">
           <string>Logs</string>
          </property>
         </widget>
        </item>
-       <item row="17" column="0">
+       <item row="18" column="0">
         <widget class="QLabel" name="label_10">
          <property name="text">
           <string>System Host File</string>
          </property>
         </widget>
        </item>
-       <item row="18" column="0">
+       <item row="19" column="0">
         <widget class="QLabel" name="label_11">
          <property name="text">
           <string>TTL Cache</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="6" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>Custom Abroad DNS Servers</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
+       <item row="6" column="1">
         <widget class="QLineEdit" name="edtAbroadDNSServers">
          <property name="placeholderText">
           <string>8.8.8.8 1.1.1.1 separated by whitespace</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
+       <item row="7" column="0">
         <widget class="QLabel" name="label_6">
          <property name="text">
           <string>Ads Plugin</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="7" column="1">
         <widget class="QCheckBox" name="cbAdsPlugin">
          <property name="text">
           <string>Enabled</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="8" column="0">
         <widget class="QLabel" name="label_12">
          <property name="text">
           <string>Ads Policy</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="8" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QRadioButton" name="rbDefaultAdsPolicy">
@@ -382,51 +382,65 @@
          </item>
         </layout>
        </item>
-       <item row="8" column="0">
+       <item row="9" column="0">
         <widget class="QLabel" name="label_13">
          <property name="text">
           <string>Ads List Store</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="1">
+       <item row="9" column="1">
         <widget class="QCheckBox" name="cbAdsListStore">
          <property name="text">
           <string>Enabled</string>
          </property>
         </widget>
        </item>
-       <item row="9" column="0">
+       <item row="10" column="0">
         <widget class="QLabel" name="label_14">
          <property name="text">
           <string>Custom Ads Black List</string>
          </property>
         </widget>
        </item>
-       <item row="9" column="1">
+       <item row="10" column="1">
         <widget class="QLineEdit" name="edtAdsBlackList"/>
        </item>
-       <item row="10" column="0">
+       <item row="11" column="0">
         <widget class="QLabel" name="label_15">
          <property name="text">
           <string>Custom Ads White List</string>
          </property>
         </widget>
        </item>
-       <item row="10" column="1">
+       <item row="11" column="1">
         <widget class="QLineEdit" name="edtAdsWhiteList"/>
        </item>
-       <item row="11" column="0">
+       <item row="12" column="0">
         <widget class="QLabel" name="label_16">
          <property name="text">
           <string>Ads Auto Update Interval</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="1">
+       <item row="12" column="1">
         <widget class="QLineEdit" name="edtAdsAutoUpdateInterval">
          <property name="placeholderText">
           <string>24h,60m etc, valid time units are &quot;ns&quot;, &quot;us&quot; (or &quot;µs&quot;), &quot;ms&quot;, &quot;s&quot;, &quot;m&quot;, &quot;h&quot;. </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>Listen Address</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="placeholderText">
+          <string>:53 or 127.0.0.1:53 or 192.168.1.1:53 etc</string>
          </property>
         </widget>
        </item>
