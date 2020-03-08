@@ -3,5 +3,7 @@
         <file>res/start.png</file>
         <file>res/stop.png</file>
         <file>corednsgui.png</file>
+        <file>res/alipay.jpg</file>
+        <file>res/wepay.jpg</file>
     </qresource>
 </RCC>

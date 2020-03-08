@@ -17,13 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     $$PWD/main.cpp \
-    $$PWD/mainwindow.cpp
+    $$PWD/mainwindow.cpp \
+    donatedialog.cpp
 
 HEADERS += \
-    $$PWD/mainwindow.h
+    $$PWD/mainwindow.h \
+    donatedialog.h
 
 FORMS += \
-    $$PWD/mainwindow.ui
+    $$PWD/mainwindow.ui \
+    donatedialog.ui
 
 win32: RC_FILE += $$PWD/corednsgui.rc
 

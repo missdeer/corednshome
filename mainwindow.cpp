@@ -5,6 +5,7 @@
 
 #include "mainwindow.h"
 
+#include "donatedialog.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -54,7 +55,11 @@ void MainWindow::on_actionHomepage_triggered()
     QDesktopServices::openUrl(QUrl("https://github.com/missdeer/corednsgui"));
 }
 
-void MainWindow::on_actionDonate_triggered() {}
+void MainWindow::on_actionDonate_triggered()
+{
+    DonateDialog dlg(this);
+    dlg.exec();
+}
 
 void MainWindow::on_actionAbout_triggered()
 {
