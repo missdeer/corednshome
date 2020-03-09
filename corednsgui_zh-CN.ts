@@ -547,38 +547,52 @@
         <translation>停止CoreDNS</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="67"/>
+        <location filename="mainwindow.cpp" line="108"/>
         <source>About CoreDNS GUI</source>
         <translation>关于CoreDNS图形用户界面</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="68"/>
+        <location filename="mainwindow.cpp" line="109"/>
+        <source>GUI configuration tool for &lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;custom build CoreDNS&lt;/a&gt;.&lt;br&gt;Homepage: &lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</source>
+        <translation>用于&lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;自行编译的CoreDNS&lt;/a&gt;的图形用户界面的配置工具。&lt;br&gt;主页：&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</translation>
+    </message>
+    <message>
         <source>GUI configuration tool for custom build CoreDNS.&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</source>
-        <translation>用于自行编译的CoreDNS的图形用户界面的配置工具。&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</translation>
+        <translation type="vanished">用于自行编译的CoreDNS的图形用户界面的配置工具。&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="27"/>
-        <location filename="main.cpp" line="35"/>
+        <location filename="main.cpp" line="28"/>
+        <location filename="main.cpp" line="36"/>
         <source>Critial error</source>
         <translation>紧急错误</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="27"/>
+        <location filename="main.cpp" line="28"/>
         <source>Could not get program path to elevate privileges.</source>
         <translation>找不到适用于该权限的程序路径。</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="35"/>
+        <location filename="main.cpp" line="36"/>
         <source>Failed to create authorization reference.</source>
         <translation>创建权限认证引用失败。</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="57"/>
+        <location filename="main.cpp" line="58"/>
         <source>CoreDNS GUI</source>
         <translation>CoreDNS图形用户界面</translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="82"/>
+        <source>Critical error</source>
+        <translation>紧急错误</translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="82"/>
+        <source>SSL not supported, exit now.</source>
+        <translation>不支持SSL，立即退出。</translation>
     </message>
 </context>
 </TS>

@@ -214,6 +214,46 @@ void Settings::setBogusEnabled(bool bogusEnabled)
     m_bogusEnabled = bogusEnabled;
 }
 
+const QString &Settings::chinaDomainList() const
+{
+    return m_chinaDomainList;
+}
+
+void Settings::setChinaDomainList(const QString &chinaDomainList)
+{
+    m_chinaDomainList = chinaDomainList;
+}
+
+const QString &Settings::googleDomainList() const
+{
+    return m_googleDomainList;
+}
+
+void Settings::setGoogleDomainList(const QString &googleDomainList)
+{
+    m_googleDomainList = googleDomainList;
+}
+
+const QString &Settings::appleDomainList() const
+{
+    return m_appleDomainList;
+}
+
+void Settings::setAppleDomainList(const QString &appleDomainList)
+{
+    m_appleDomainList = appleDomainList;
+}
+
+const QString &Settings::bogusIPList() const
+{
+    return m_bogusIPList;
+}
+
+void Settings::setBogusIPList(const QString &bogusIPList)
+{
+    m_bogusIPList = bogusIPList;
+}
+
 void Settings::save()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "CoreDNS GUI");
@@ -235,6 +275,10 @@ void Settings::save()
     settings.setValue("hostEnabled", m_hostEnabled);
     settings.setValue("ttlCacheEnabled", m_ttlCacheEnabled);
     settings.setValue("bogusEnabled", m_bogusEnabled);
+    settings.setValue("chinaDomainList", m_chinaDomainList);
+    settings.setValue("googleDomainList", m_googleDomainList);
+    settings.setValue("appleDomainList", m_appleDomainList);
+    settings.setValue("bogusIPList", m_bogusIPList);
     settings.sync();
 }
 
@@ -259,4 +303,8 @@ void Settings::load()
     m_hostEnabled            = settings.value("hostEnabled", true).toBool();
     m_ttlCacheEnabled        = settings.value("ttlCacheEnabled", true).toBool();
     m_bogusEnabled           = settings.value("bogusEnabled", false).toBool();
+    m_chinaDomainList        = settings.value("chinaDomainList").toString();
+    m_googleDomainList       = settings.value("googleDomainList").toString();
+    m_appleDomainList        = settings.value("appleDomainList").toString();
+    m_bogusIPList            = settings.value("bogusIPList").toString();
 }

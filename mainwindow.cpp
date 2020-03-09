@@ -106,8 +106,8 @@ void MainWindow::on_actionAbout_triggered()
 {
     QMessageBox::about(this,
                        tr("About CoreDNS GUI"),
-                       tr("GUI configuration tool for custom build CoreDNS.<br>"
-                          "<a href=\"https://github.com/missdeer/corednsgui\">https://github.com/missdeer/corednsgui</a>"));
+                       tr("GUI configuration tool for <a href=\"https://github.com/missdeer/coredns_custom_build\">custom build CoreDNS</a>.<br>"
+                          "Homepage: <a href=\"https://github.com/missdeer/corednsgui\">https://github.com/missdeer/corednsgui</a>"));
 }
 
 void MainWindow::on_actionStartCoreDNS_triggered()
@@ -123,6 +123,7 @@ void MainWindow::on_actionStopCoreDNS_triggered()
 void MainWindow::onChinaDomainRequestFinished()
 {
     auto *reply = qobject_cast<NetworkReplyHelper *>(sender());
+    Q_ASSERT(reply);
     reply->deleteLater();
 
     QByteArray &content = reply->content();
@@ -135,12 +136,14 @@ void MainWindow::onChinaDomainRequestFinished()
         if (l.size() > 1)
             res.append(l.at(1));
     }
-    m_chinaDomainList = res.join(' ');
+    Q_ASSERT(g_settings);
+    g_settings->setChinaDomainList(res.join(' '));
 }
 
 void MainWindow::onGoogleDomainRequestFinished()
 {
     auto *reply = qobject_cast<NetworkReplyHelper *>(sender());
+    Q_ASSERT(reply);
     reply->deleteLater();
 
     QByteArray &content = reply->content();
@@ -153,12 +156,14 @@ void MainWindow::onGoogleDomainRequestFinished()
         if (l.size() > 1)
             res.append(l.at(1));
     }
-    m_googleDomainList = res.join(' ');
+    Q_ASSERT(g_settings);
+    g_settings->setGoogleDomainList(res.join(' '));
 }
 
 void MainWindow::onAppleDomainRequestFinished()
 {
     auto *reply = qobject_cast<NetworkReplyHelper *>(sender());
+    Q_ASSERT(reply);
     reply->deleteLater();
 
     QByteArray &content = reply->content();
@@ -171,12 +176,14 @@ void MainWindow::onAppleDomainRequestFinished()
         if (l.size() > 1)
             res.append(l.at(1));
     }
-    m_appleDomainList = res.join(' ');
+    Q_ASSERT(g_settings);
+    g_settings->setAppleDomainList(res.join(' '));
 }
 
 void MainWindow::onBogusListRequestFinished()
 {
     auto *reply = qobject_cast<NetworkReplyHelper *>(sender());
+    Q_ASSERT(reply);
     reply->deleteLater();
 
     QByteArray &content = reply->content();
@@ -189,7 +196,8 @@ void MainWindow::onBogusListRequestFinished()
         if (line.startsWith(leading))
             res.append(line.mid(leading.size()));
     }
-    m_bogusList = res.join(' ');
+    Q_ASSERT(g_settings);
+    g_settings->setBogusIPList(res.join(' '));
 }
 
 void MainWindow::updateChinaDomainList()

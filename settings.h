@@ -77,6 +77,18 @@ public:
     [[nodiscard]] bool bogusEnabled() const;
     void               setBogusEnabled(bool bogusEnabled);
 
+    [[nodiscard]] const QString &chinaDomainList() const;
+    void                         setChinaDomainList(const QString &chinaDomainList);
+
+    [[nodiscard]] const QString &googleDomainList() const;
+    void                         setGoogleDomainList(const QString &googleDomainList);
+
+    [[nodiscard]] const QString &appleDomainList() const;
+    void                         setAppleDomainList(const QString &appleDomainList);
+
+    [[nodiscard]] const QString &bogusIPList() const;
+    void                         setBogusIPList(const QString &bogusIPList);
+
 private:
     QString     m_listenAddress {":53"};
     QString     m_redis;
@@ -85,6 +97,10 @@ private:
     QString     m_customAdsBlackList;
     QString     m_customAdsWhiteList;
     QString     m_adsAutoUpdateInterval {"24h"};
+    QString     m_chinaDomainList;
+    QString     m_googleDomainList;
+    QString     m_appleDomainList;
+    QString     m_bogusIPList;
     QStringList m_chinaDNSServerList;
     QStringList m_abroadDNSServerList;
     bool        m_adsEnabled {true};

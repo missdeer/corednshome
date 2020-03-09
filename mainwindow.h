@@ -78,10 +78,6 @@ private:
     Ui::MainWindow *ui;
     QNetworkAccessManager m_nam;
     bool                  m_isCoreDNSStarted {false};
-    QString               m_chinaDomainList;
-    QString               m_appleDomainList;
-    QString               m_googleDomainList;
-    QString               m_bogusList;
 
     void updateChinaDomainList();
     void updateAppleDomainList();
