@@ -29,6 +29,13 @@ FORMS += \
     $$PWD/donatedialog.ui
 
 win32: RC_FILE += $$PWD/corednsgui.rc
+macx: {
+    LIBS += -framework IOKit \
+            -framework Cocoa \
+            -framework Security \
+            -framework AppKit \
+            -framework ServiceManagement
+}
 
 TRANSLATIONS += \
     $$PWD/corednsgui_zh_CN.ts
