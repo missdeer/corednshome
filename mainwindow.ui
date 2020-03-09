@@ -256,7 +256,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QListWidget" name="listAbroadDNSServer">
+          <widget class="QListWidget" name="listAbroadDNSServers">
            <item>
             <property name="text">
              <string>udp://208.67.222.222:5353</string>

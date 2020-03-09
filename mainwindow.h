@@ -72,7 +72,7 @@ private slots:
 
     void on_listChinaDNSServers_itemChanged(QListWidgetItem *item);
 
-    void on_listAbroadDNSServer_itemChanged(QListWidgetItem *item);
+    void on_listAbroadDNSServers_itemChanged(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

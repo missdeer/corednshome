@@ -12,30 +12,26 @@ void Settings::initialize()
     load();
 }
 
-void Settings::changeChinaDNSServerCheckState(const QString &server, bool checked)
+void Settings::addChinaDNSServer(const QString &server)
 {
-    if (checked)
-    {
-        if (!m_chinaDNSServerList.contains(server))
-            m_chinaDNSServerList.append(" " + server);
-    }
-    else
-    {
-        m_chinaDNSServerList.removeAll(server);
-    }
+    if (!m_chinaDNSServerList.contains(server))
+        m_chinaDNSServerList.append(server);
 }
 
-void Settings::changeAbroadDNSServerCheckState(const QString &server, bool checked)
+void Settings::removeChinaDNSServer(const QString &server)
 {
-    if (checked)
-    {
-        if (!m_abroadDNSServerList.contains(server))
-            m_abroadDNSServerList.append(" " + server);
-    }
-    else
-    {
-        m_abroadDNSServerList.removeAll(server);
-    }
+    m_chinaDNSServerList.removeAll(server);
+}
+
+void Settings::addAbroadDNSServer(const QString &server)
+{
+    if (!m_abroadDNSServerList.contains(server))
+        m_abroadDNSServerList.append(server);
+}
+
+void Settings::removeAbroadDNSServer(const QString &server)
+{
+    m_abroadDNSServerList.removeAll(server);
 }
 
 const QString &Settings::listenAddress() const
@@ -98,24 +94,24 @@ void Settings::setCustomAdsWhiteList(const QString &customAdsWhiteList)
     m_customAdsWhiteList = customAdsWhiteList;
 }
 
-const QStringList &Settings::ChinaDNSServerList() const
+const QStringList &Settings::chinaDNSServerList() const
 {
     return m_chinaDNSServerList;
 }
 
-void Settings::setChinaDNSServerList(const QStringList &ChinaDNSServerList)
+void Settings::setChinaDNSServerList(const QStringList &chinaDNSServerList)
 {
-    m_chinaDNSServerList = ChinaDNSServerList;
+    m_chinaDNSServerList = chinaDNSServerList;
 }
 
-const QStringList &Settings::AbroadDNSServerList() const
+const QStringList &Settings::abroadDNSServerList() const
 {
     return m_abroadDNSServerList;
 }
 
-void Settings::setAbroadDNSServerList(const QStringList &AbroadDNSServerList)
+void Settings::setAbroadDNSServerList(const QStringList &abroadDNSServerList)
 {
-    m_abroadDNSServerList = AbroadDNSServerList;
+    m_abroadDNSServerList = abroadDNSServerList;
 }
 
 bool Settings::adsEnabled() const
@@ -228,8 +224,8 @@ void Settings::save()
     settings.setValue("customAdsBlackList", m_customAdsBlackList);
     settings.setValue("customAdsWhiteList", m_customAdsWhiteList);
     settings.setValue("adsAutoUpdateInterval", m_adsAutoUpdateInterval);
-    settings.setValue("ChinaDNSServerList", m_chinaDNSServerList);
-    settings.setValue("AbroadDNSServerList", m_abroadDNSServerList);
+    settings.setValue("chinaDNSServerList", m_chinaDNSServerList);
+    settings.setValue("abroadDNSServerList", m_abroadDNSServerList);
     settings.setValue("adsEnabled", m_adsEnabled);
     settings.setValue("adsCacheStore", m_adsCacheStore);
     settings.setValue("defaultAdsPolicy", m_defaultAdsPolicy);
@@ -252,8 +248,8 @@ void Settings::load()
     m_customAdsBlackList     = settings.value("customAdsBlackList").toString();
     m_adsAutoUpdateInterval  = settings.value("adsAutoUpdateInterval", "24h").toString();
     m_listenAddress          = settings.value("listenAddress").toString();
-    m_chinaDNSServerList     = settings.value("ChinaDNSServerList").toStringList();
-    m_abroadDNSServerList    = settings.value("AbroadDNSServerList").toStringList();
+    m_chinaDNSServerList     = settings.value("chinaDNSServerList").toStringList();
+    m_abroadDNSServerList    = settings.value("abroadDNSServerList").toStringList();
     m_adsEnabled             = settings.value("adsEnabled", true).toBool();
     m_adsCacheStore          = settings.value("adsCacheStore", true).toBool();
     m_defaultAdsPolicy       = settings.value("defaultAdsPolicy", true).toBool();

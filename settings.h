@@ -18,8 +18,10 @@ public:
     void load();
     void initialize();
 
-    void changeChinaDNSServerCheckState(const QString &server, bool checked);
-    void changeAbroadDNSServerCheckState(const QString &server, bool checked);
+    void addChinaDNSServer(const QString &server);
+    void removeChinaDNSServer(const QString &server);
+    void addAbroadDNSServer(const QString &server);
+    void removeAbroadDNSServer(const QString &server);
 
     [[nodiscard]] const QString &listenAddress() const;
     void                         setListenAddress(const QString &listenAddress);
@@ -39,11 +41,11 @@ public:
     [[nodiscard]] const QString &customAdsWhiteList() const;
     void                         setCustomAdsWhiteList(const QString &customAdsWhiteList);
 
-    [[nodiscard]] const QStringList &ChinaDNSServerList() const;
-    void                             setChinaDNSServerList(const QStringList &ChinaDNSServerList);
+    [[nodiscard]] const QStringList &chinaDNSServerList() const;
+    void                             setChinaDNSServerList(const QStringList &chinaDNSServerList);
 
-    [[nodiscard]] const QStringList &AbroadDNSServerList() const;
-    void                             setAbroadDNSServerList(const QStringList &AbroadDNSServerList);
+    [[nodiscard]] const QStringList &abroadDNSServerList() const;
+    void                             setAbroadDNSServerList(const QStringList &abroadDNSServerList);
 
     [[nodiscard]] bool adsEnabled() const;
     void               setAdsEnabled(bool adsEnabled);

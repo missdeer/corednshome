@@ -37,6 +37,22 @@ MainWindow::MainWindow(QWidget *parent)
     ui->edtListenAddress->setText(g_settings->listenAddress());
     ui->actionStartCoreDNS->setEnabled(!m_isCoreDNSStarted);
     ui->actionStopCoreDNS->setEnabled(m_isCoreDNSStarted);
+
+    auto servers = g_settings->chinaDNSServerList();
+    for (const auto &server : servers)
+    {
+        auto items = ui->listChinaDNSServers->findItems(server, Qt::MatchFixedString);
+        for (auto item : items)
+            item->setCheckState(Qt::Checked);
+    }
+    servers = g_settings->abroadDNSServerList();
+    for (const auto &server : servers)
+    {
+        auto items = ui->listAbroadDNSServers->findItems(server, Qt::MatchFixedString);
+        for (auto item : items)
+            item->setCheckState(Qt::Checked);
+    }
+
     updateBogusList();
     updateAppleDomainList();
     updateGoogleDomainList();
@@ -356,10 +372,22 @@ void MainWindow::on_listChinaDNSServers_itemChanged(QListWidgetItem *item)
 {
     QString text    = item->text();
     bool    checked = (item->checkState() == Qt::Checked);
+
+    Q_ASSERT(g_settings);
+    if (checked)
+        g_settings->addChinaDNSServer(text);
+    else
+        g_settings->removeChinaDNSServer(text);
 }
 
-void MainWindow::on_listAbroadDNSServer_itemChanged(QListWidgetItem *item)
+void MainWindow::on_listAbroadDNSServers_itemChanged(QListWidgetItem *item)
 {
     QString text    = item->text();
     bool    checked = (item->checkState() == Qt::Checked);
+
+    Q_ASSERT(g_settings);
+    if (checked)
+        g_settings->addAbroadDNSServer(text);
+    else
+        g_settings->removeAbroadDNSServer(text);
 }
