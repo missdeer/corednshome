@@ -38,7 +38,7 @@ macx: {
 }
 
 TRANSLATIONS += \
-    $$PWD/corednsgui_zh_CN.ts
+    $$PWD/corednsgui_zh-CN.ts
 
 RESOURCES += \
     $$PWD/corednsgui.qrc
