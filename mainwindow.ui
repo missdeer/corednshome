@@ -231,7 +231,11 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QLineEdit" name="edtAdsBlackList"/>
+          <widget class="QLineEdit" name="edtAdsBlackList">
+           <property name="placeholderText">
+            <string>URLs separated by whitespace</string>
+           </property>
+          </widget>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_12">
@@ -995,7 +999,11 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QLineEdit" name="edtAdsWhiteList"/>
+          <widget class="QLineEdit" name="edtAdsWhiteList">
+           <property name="placeholderText">
+            <string>URLs separated by whitespace</string>
+           </property>
+          </widget>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_16">
