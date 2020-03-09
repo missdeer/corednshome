@@ -11,6 +11,7 @@
 #endif
 
 #include "mainwindow.h"
+#include "settings.h"
 
 #ifdef Q_OS_MAC
 bool relaunch_as_root()
@@ -53,7 +54,7 @@ int main(int argc, char *argv[])
 #ifndef Q_OS_WIN
     QCoreApplication::setSetuidAllowed(true);
 #endif
-    QCoreApplication::setOrganizationName(QLatin1String("https://github.com/missdeer"));
+    QCoreApplication::setOrganizationName(QLatin1String("minidump.info"));
     QCoreApplication::setApplicationName(QObject::tr("CoreDNS GUI"));
     QCoreApplication::setApplicationVersion(QLatin1String("1.0"));
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -76,6 +77,12 @@ int main(int argc, char *argv[])
     //    }
     //#endif
 
+    if (!QSslSocket::supportsSsl())
+    {
+        QMessageBox::critical(nullptr, QObject::tr("Critical error"), QObject::tr("SSL not supported, exit now."), QMessageBox::Ok);
+        return 1;
+    }
+
     QString     locale = QLocale().uiLanguages()[0];
     QTranslator translator;
     QTranslator qtTranslator;
@@ -93,30 +100,37 @@ int main(int argc, char *argv[])
 
     if (!translator.load("corednsgui_" + locale, localeDirPath))
     {
-        qDebug() << "loading " << locale << " from " << localeDirPath << " failed";
+        qDebug() << "loading "
+                 << "corednsgui_" + locale << " from " << localeDirPath << " failed";
     }
     else
     {
-        qDebug() << "loading " << locale << " from " << localeDirPath << " success";
+        qDebug() << "loading "
+                 << "corednsgui_" + locale << " from " << localeDirPath << " success";
         if (!a.installTranslator(&translator))
         {
-            qDebug() << "installing translator failed ";
+            qDebug() << "installing corednsgui translator failed ";
         }
     }
 
     // qt locale
     if (!qtTranslator.load("qt_" + locale, localeDirPath))
     {
-        qDebug() << "loading " << locale << " from " << localeDirPath << " failed";
+        qDebug() << "loading "
+                 << "qt_" + locale << " from " << localeDirPath << " failed";
     }
     else
     {
-        qDebug() << "loading " << locale << " from " << localeDirPath << " success";
+        qDebug() << "loading "
+                 << "qt_" + locale << " from " << localeDirPath << " success";
         if (!a.installTranslator(&qtTranslator))
         {
             qDebug() << "installing qt translator failed ";
         }
     }
+    Settings settings;
+    g_settings = &settings;
+    g_settings->initialize();
 
     MainWindow w;
     w.show();

@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,14 +15,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+include($$PWD/3rdparty/zlib.pri)
+
 SOURCES += \
     $$PWD/main.cpp \
     $$PWD/mainwindow.cpp \
-    donatedialog.cpp
+    $$PWD/donatedialog.cpp \
+    $$PWD/networkreplyhelper.cpp \
+    $$PWD/scopedguard.cpp \
+    $$PWD/settings.cpp
 
 HEADERS += \
     $$PWD/mainwindow.h \
-    donatedialog.h
+    $$PWD/donatedialog.h \
+    $$PWD/networkreplyhelper.h \
+    $$PWD/scopedguard.h \
+    $$PWD/settings.h
 
 FORMS += \
     $$PWD/mainwindow.ui \
