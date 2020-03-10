@@ -3,7 +3,7 @@ GUI configuraiton tool for [custom build CoreDNS](https://github.com/missdeer/co
 
 # Screenshot
 
-![main window](https://raw.githubusercontent.com/missdeer/corednsgui/screenshots/mainwindow.png)
+![main window](https://raw.githubusercontent.com/missdeer/corednsgui/master/screenshots/mainwindow.png)
 
 # Donate
 
