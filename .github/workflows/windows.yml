@@ -90,6 +90,8 @@ jobs:
 
       - name: upload artifact
         uses: actions/upload-artifact@v1
+        env:
+          archiveName: ${{ env.targetName }}-${{ matrix.qt_arch }}
         with:
           path: ${env:archiveName}
           name: ${env:archiveName}
