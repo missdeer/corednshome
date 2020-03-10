@@ -68,9 +68,9 @@ jobs:
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
           nmake
           cd ..
+
       # tag 打包
-      - name: package
-        if: startsWith(github.event.ref, 'refs/tags/')
+      - name: deploy
         env:
           VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
           archiveName: ${{ env.targetName }}-${{ matrix.qt_arch }}
@@ -80,10 +80,28 @@ jobs:
           New-Item -ItemType Directory ${env:archiveName}
           # 拷贝exe
           Copy-Item build\Release\${env:targetName}'.exe' ${env:archiveName}\
-          Copy-Item build\Release\Everything.exe ${env:archiveName}\
-          Copy-Item build\Release\Everything*.dll ${env:archiveName}\
+          Copy-Item build\Release\*.exe ${env:archiveName}\
+          Copy-Item build\Release\*.dll ${env:archiveName}\
+          Copy-Item build\Release\*.manifest ${env:archiveName}\
           # 拷贝依赖
-          windeployqt --qmldir . ${env:archiveName}\${env:targetName}'.exe'
+          windeployqt.exe --qmldir . ${env:archiveName}\${env:targetName}'.exe'
+          lrelease corednsgui_zh-CN.ts
+          Copy-Item corednsgui_zh-CN.qm ${env:archiveName}\translations\
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          path: ${env:archiveName}
+          name: ${env:archiveName}
+
+      # tag 打包
+      - name: package
+        if: startsWith(github.event.ref, 'refs/tags/')
+        env:
+          VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
+          archiveName: ${{ env.targetName }}-${{ matrix.qt_arch }}
+        shell: pwsh
+        run: |
           # 打包zip
           Compress-Archive -Path ${env:archiveName} ${env:archiveName}'.zip'
           # 记录环境变量packageName给后续step
