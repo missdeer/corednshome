@@ -89,6 +89,12 @@ public:
     [[nodiscard]] const QString &bogusIPList() const;
     void                         setBogusIPList(const QString &bogusIPList);
 
+    [[nodiscard]] bool exceptGoogleDomain() const;
+    void               setExceptGoogleDomain(bool exceptGoogleDomain);
+
+    [[nodiscard]] bool exceptAppleDomain() const;
+    void               setExceptAppleDomain(bool exceptAppleDomain);
+
 private:
     QString     m_listenAddress {":53"};
     QString     m_redis;
@@ -112,6 +118,8 @@ private:
     bool        m_hostEnabled {true};
     bool        m_ttlCacheEnabled {true};
     bool        m_bogusEnabled {false};
+    bool        m_exceptGoogleDomain {true};
+    bool        m_exceptAppleDomain {true};
 };
 
 inline Settings *g_settings = nullptr;

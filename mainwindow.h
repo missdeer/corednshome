@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QNetworkAccessManager>
+#include <QProcess>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,10 +20,17 @@ public:
     void startCoreDNS();
     void stopCoreDNS();
 private slots:
+    void onAboutToQuit();
     void onChinaDomainRequestFinished();
     void onGoogleDomainRequestFinished();
     void onAppleDomainRequestFinished();
     void onBogusListRequestFinished();
+    void onReadyReadStandardOutput();
+    void onReadyReadStandardError();
+    void onErrorOccurred(QProcess::ProcessError error);
+    void onFinished(int exitCode, QProcess::ExitStatus exitStatus);
+    void onStarted();
+    void onStateChanged(QProcess::ProcessState newState);
 
     void on_actionExportCorefile_triggered();
 
@@ -74,14 +82,21 @@ private slots:
 
     void on_listAbroadDNSServers_itemChanged(QListWidgetItem *item);
 
+    void on_cbResolveAppleDomainByChinaDNS_stateChanged(int state);
+
+    void on_cbResolveGoogleDomainByChinaDNS_stateChanged(int state);
+
 private:
     Ui::MainWindow *ui;
-    QNetworkAccessManager m_nam;
+    QProcess *            m_coredns {nullptr};
     bool                  m_isCoreDNSStarted {false};
+    QNetworkAccessManager m_nam;
+    QString               m_corefilePath;
 
     void updateChinaDomainList();
     void updateAppleDomainList();
     void updateGoogleDomainList();
     void updateBogusList();
+    bool exportCorefile(const QString &corefile);
 };
 #endif // MAINWINDOW_H

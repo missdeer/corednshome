@@ -254,6 +254,26 @@ void Settings::setBogusIPList(const QString &bogusIPList)
     m_bogusIPList = bogusIPList;
 }
 
+bool Settings::exceptGoogleDomain() const
+{
+    return m_exceptGoogleDomain;
+}
+
+void Settings::setExceptGoogleDomain(bool exceptGoogleDomain)
+{
+    m_exceptGoogleDomain = exceptGoogleDomain;
+}
+
+bool Settings::exceptAppleDomain() const
+{
+    return m_exceptAppleDomain;
+}
+
+void Settings::setExceptAppleDomain(bool exceptAppleDomain)
+{
+    m_exceptAppleDomain = exceptAppleDomain;
+}
+
 void Settings::save()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "CoreDNS GUI");
@@ -279,6 +299,8 @@ void Settings::save()
     settings.setValue("googleDomainList", m_googleDomainList);
     settings.setValue("appleDomainList", m_appleDomainList);
     settings.setValue("bogusIPList", m_bogusIPList);
+    settings.setValue("googleDomain", m_googleDomainList);
+    settings.setValue("appleDomain", m_appleDomainList);
     settings.sync();
 }
 
@@ -290,6 +312,7 @@ void Settings::load()
     m_customChinaDNSServers  = settings.value("customChinaDNSServerList").toString();
     m_customAbroadDNSServers = settings.value("customAbroadDNSServerList").toString();
     m_customAdsBlackList     = settings.value("customAdsBlackList").toString();
+    m_customAdsWhiteList     = settings.value("customAdsWhiteList").toString();
     m_adsAutoUpdateInterval  = settings.value("adsAutoUpdateInterval", "24h").toString();
     m_listenAddress          = settings.value("listenAddress").toString();
     m_chinaDNSServerList     = settings.value("chinaDNSServerList").toStringList();
@@ -303,6 +326,8 @@ void Settings::load()
     m_hostEnabled            = settings.value("hostEnabled", true).toBool();
     m_ttlCacheEnabled        = settings.value("ttlCacheEnabled", true).toBool();
     m_bogusEnabled           = settings.value("bogusEnabled", false).toBool();
+    m_googleDomainList       = settings.value("googleDomainList", true).toBool();
+    m_appleDomainList        = settings.value("appleDomainList", true).toBool();
     m_chinaDomainList        = settings.value("chinaDomainList").toString();
     m_googleDomainList       = settings.value("googleDomainList").toString();
     m_appleDomainList        = settings.value("appleDomainList").toString();

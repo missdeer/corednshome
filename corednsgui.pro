@@ -36,7 +36,10 @@ FORMS += \
     $$PWD/mainwindow.ui \
     $$PWD/donatedialog.ui
 
-win32: RC_FILE += $$PWD/corednsgui.rc
+win32: {
+    RC_FILE += $$PWD/corednsgui.rc
+    QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
+}
 macx: {
     LIBS += -framework IOKit \
             -framework Cocoa \
