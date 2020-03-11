@@ -11,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>CoreDNS GUI</string>
+   <string>CoreDNS Home</string>
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>corednsgui.png</normaloff>corednsgui.png</iconset>
+    <normaloff>corednshome.png</normaloff>corednshome.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -1188,7 +1188,7 @@
   </widget>
   <action name="actionExportCorefile">
    <property name="icon">
-    <iconset resource="corednsgui.qrc">
+    <iconset resource="corednshome.qrc">
      <normaloff>:/res/export.png</normaloff>:/res/export.png</iconset>
    </property>
    <property name="text">
@@ -1207,7 +1207,7 @@
   </action>
   <action name="actionDonate">
    <property name="icon">
-    <iconset resource="corednsgui.qrc">
+    <iconset resource="corednshome.qrc">
      <normaloff>:/res/donate.png</normaloff>:/res/donate.png</iconset>
    </property>
    <property name="text">
@@ -1216,8 +1216,8 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="corednsgui.qrc">
-     <normaloff>:/corednsgui.png</normaloff>:/corednsgui.png</iconset>
+    <iconset resource="corednshome.qrc">
+     <normaloff>:/corednshome.png</normaloff>:/corednshome.png</iconset>
    </property>
    <property name="text">
     <string>&amp;About...</string>
@@ -1225,7 +1225,7 @@
   </action>
   <action name="actionStartCoreDNS">
    <property name="icon">
-    <iconset resource="corednsgui.qrc">
+    <iconset resource="corednshome.qrc">
      <normaloff>:/res/start.png</normaloff>:/res/start.png</iconset>
    </property>
    <property name="text">
@@ -1234,7 +1234,7 @@
   </action>
   <action name="actionStopCoreDNS">
    <property name="icon">
-    <iconset resource="corednsgui.qrc">
+    <iconset resource="corednshome.qrc">
      <normaloff>:/res/stop.png</normaloff>:/res/stop.png</iconset>
    </property>
    <property name="text">
@@ -1248,7 +1248,7 @@
   </action>
  </widget>
  <resources>
-  <include location="corednsgui.qrc"/>
+  <include location="corednshome.qrc"/>
  </resources>
  <connections/>
 </ui>

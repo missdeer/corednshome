@@ -34,7 +34,7 @@ jobs:
             msvc_arch: x86
             qt_arch_install: msvc2017
     env:
-      targetName: corednsgui
+      targetName: corednshome
     # 步骤
     steps:
       - name: Install Qt
@@ -73,7 +73,7 @@ jobs:
       - name: deploy
         env:
           VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
-          archiveName: CoreDNSGUI-Win
+          archiveName: CoreDNSHome-Win
         shell: pwsh
         run: |
           # 创建文件夹
@@ -85,16 +85,16 @@ jobs:
           Copy-Item build\src\Release\*.manifest ${env:archiveName}\
           # 拷贝依赖
           windeployqt.exe --qmldir . ${env:archiveName}\${env:targetName}'.exe'
-          lrelease src\corednsgui_zh-CN.ts
-          Copy-Item src\corednsgui_zh-CN.qm ${env:archiveName}\translations\
+          lrelease src\corednshome_zh-CN.ts
+          Copy-Item src\corednshome_zh-CN.qm ${env:archiveName}\translations\
 
       - name: upload artifact
         uses: actions/upload-artifact@v1
         env:
-          archiveName: CoreDNSGUI-Win
+          archiveName: CoreDNSHome-Win
         with:
-          path: CoreDNSGUI-Win
-          name: CoreDNSGUI-Win-${{ matrix.msvc_arch }}
+          path: CoreDNSHome-Win
+          name: CoreDNSHome-Win-${{ matrix.msvc_arch }}
 
       # tag 打包
       - name: package
@@ -105,7 +105,7 @@ jobs:
         shell: pwsh
         run: |
           # 打包zip
-          Compress-Archive -Path CoreDNSGUI-Win ${env:archiveName}'.zip'
+          Compress-Archive -Path CoreDNSHome-Win ${env:archiveName}'.zip'
           # 记录环境变量packageName给后续step
           $name = ${env:archiveName}
           echo "::set-env name=packageName::$name"

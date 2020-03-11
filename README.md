@@ -1,9 +1,9 @@
-# corednsgui
+# corednshome
 GUI configuraiton tool for [custom build CoreDNS](https://github.com/missdeer/coredns_custom_build/)
 
 # Screenshot
 
-![main window](https://raw.githubusercontent.com/missdeer/corednsgui/master/screenshots/mainwindow.png)
+![main window](https://raw.githubusercontent.com/missdeer/corednshome/master/screenshots/mainwindow.png)
 
 # Donate
 

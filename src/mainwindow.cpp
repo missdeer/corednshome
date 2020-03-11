@@ -85,7 +85,7 @@ MainWindow::MainWindow(QWidget *parent)
       , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowIcon(QIcon(":/corednsgui.png"));
+    setWindowIcon(QIcon(":/corednshome.png"));
     ui->edtChinaDNSServers->setText(g_settings->customChinaDNSServerList());
     ui->edtAbroadDNSServers->setText(g_settings->customAbroadDNSServerList());
     ui->cbAdsPlugin->setChecked(g_settings->adsEnabled());
@@ -215,7 +215,7 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionHomepage_triggered()
 {
-    QDesktopServices::openUrl(QUrl("https://github.com/missdeer/corednsgui"));
+    QDesktopServices::openUrl(QUrl("https://github.com/missdeer/corednshome"));
 }
 
 void MainWindow::on_actionDonate_triggered()
@@ -227,9 +227,9 @@ void MainWindow::on_actionDonate_triggered()
 void MainWindow::on_actionAbout_triggered()
 {
     QMessageBox::about(this,
-                       tr("About CoreDNS GUI"),
+                       tr("About CoreDNS Home"),
                        tr("GUI configuration tool for <a href=\"https://github.com/missdeer/coredns_custom_build\">custom build CoreDNS</a>.<br>"
-                          "Homepage: <a href=\"https://github.com/missdeer/corednsgui\">https://github.com/missdeer/corednsgui</a>"));
+                          "Homepage: <a href=\"https://github.com/missdeer/corednshome\">https://github.com/missdeer/corednshome</a>"));
 }
 
 void MainWindow::on_actionStartCoreDNS_triggered()
@@ -364,11 +364,10 @@ void MainWindow::updateChinaDomainList()
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
+    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
 
     auto *reply       = m_nam.get(request);
     auto *replyHelper = new NetworkReplyHelper(reply);
-    replyHelper->setTimeout(30000);
     connect(replyHelper, SIGNAL(done()), this, SLOT(onChinaDomainRequestFinished()));
 }
 
@@ -380,11 +379,10 @@ void MainWindow::updateAppleDomainList()
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
+    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
 
     auto *reply       = m_nam.get(request);
     auto *replyHelper = new NetworkReplyHelper(reply);
-    replyHelper->setTimeout(30000);
     connect(replyHelper, SIGNAL(done()), this, SLOT(onAppleDomainRequestFinished()));
 }
 
@@ -396,11 +394,10 @@ void MainWindow::updateGoogleDomainList()
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
+    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
 
     auto *reply       = m_nam.get(request);
     auto *replyHelper = new NetworkReplyHelper(reply);
-    replyHelper->setTimeout(30000);
     connect(replyHelper, SIGNAL(done()), this, SLOT(onGoogleDomainRequestFinished()));
 }
 
@@ -416,11 +413,10 @@ void MainWindow::updateBogusList()
     request.setRawHeader("Accept", "application/json, text/javascript, */*; q=0.01");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
     request.setRawHeader("X-Requested-With", "XMLHttpRequest");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
+    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
 
     auto *reply       = m_nam.get(request);
     auto *replyHelper = new NetworkReplyHelper(reply);
-    replyHelper->setTimeout(30000);
     connect(replyHelper, SIGNAL(done()), this, SLOT(onBogusListRequestFinished()));
 }
 
@@ -669,14 +665,14 @@ void MainWindow::on_actionUpdateCoreDNSBinary_triggered()
 {
 #if defined(Q_OS_WIN)
 #    if defined(_WIN64)
-    QUrl u("https://raw.githubusercontent.com/missdeer/corednsgui/master/info/win64.txt");
+    QUrl u("https://cdn.jsdelivr.net/gh/missdeer/corednshome@master/info/win64.txt");
 #    else
-    QUrl u("https://raw.githubusercontent.com/missdeer/corednsgui/master/info/win32.txt");
+    QUrl u("https://cdn.jsdelivr.net/gh/missdeer/corednshome@master/info/win32.txt");
 #    endif
 #elif defined(Q_OS_MAC)
-    QUrl u("https://raw.githubusercontent.com/missdeer/corednsgui/master/info/macOS.txt");
+    QUrl u("https://cdn.jsdelivr.net/gh/missdeer/corednshome@master/info/macOS.txt");
 #elif defined(Q_OS_LINUX)
-    QUrl u("https://raw.githubusercontent.com/missdeer/corednsgui/master/info/linux.txt");
+    QUrl u("https://cdn.jsdelivr.net/gh/missdeer/corednshome@master/info/linux.txt");
 #else
 #endif
 
@@ -685,11 +681,10 @@ void MainWindow::on_actionUpdateCoreDNSBinary_triggered()
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
+    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
 
     auto *reply       = m_nam.get(request);
     auto *replyHelper = new NetworkReplyHelper(reply);
-    replyHelper->setTimeout(30000);
     connect(replyHelper, SIGNAL(done()), this, SLOT(onInfoRequestFinished()));
 }
 
@@ -703,17 +698,33 @@ void MainWindow::onInfoRequestFinished()
 
     QUrl u(content);
     if (!u.isValid())
+    {
+        QMessageBox::warning(this, tr("Error"), tr("Invalid CoreDNS binary URL %1").arg(u.toString()), QMessageBox::Ok);
         return;
+    }
 
     QNetworkRequest request(u);
     request.setHeader(QNetworkRequest::UserAgentHeader,
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
-    request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
+    request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
+
+    // save as coredns.7z then uncompress it
+    QString path = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    QDir    d(path);
+    if (!d.exists())
+        d.mkpath(path);
+    QString pkgPath = path + "/coredns.7z";
+    auto *  f       = new QFile(pkgPath);
+    if (!f->open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        QMessageBox::warning(this, tr("Error"), tr("Saving package to %1 failed.").arg(QDir::toNativeSeparators(pkgPath)), QMessageBox::Ok);
+        return;
+    }
 
     auto *r           = m_nam.get(request);
-    auto *replyHelper = new NetworkReplyHelper(r);
+    auto *replyHelper = new NetworkReplyHelper(r, f);
     connect(replyHelper, SIGNAL(done()), this, SLOT(onArtifactRequestFinished()));
 }
 
@@ -723,22 +734,12 @@ void MainWindow::onArtifactRequestFinished()
     Q_ASSERT(reply);
     reply->deleteLater();
 
-    QByteArray &content = reply->content();
-    // save as coredns.7z then uncompress it
-    QString path = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-    QDir    d(path);
-    if (!d.exists())
-        d.mkpath(path);
-    QString pkgPath = path + "/coredns.7z";
-    QFile   f(pkgPath);
-    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
-    {
-        QMessageBox::warning(this, tr("Error"), tr("Saving package to %1 failed.").arg(QDir::toNativeSeparators(pkgPath)), QMessageBox::Ok);
-        return;
-    }
-    f.write(content);
-    f.close();
+    auto *f = qobject_cast<QFile *>(reply->storage());
+    Q_ASSERT(f);
+    f->close();
+    f->deleteLater();
 
+    QString     pkgPath = f->fileName();
     Qt7zPackage sevenZipPkg(pkgPath);
     if (!sevenZipPkg.open())
     {
@@ -746,6 +747,7 @@ void MainWindow::onArtifactRequestFinished()
         return;
     }
 
+    QString     path         = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
     QStringList fileNameList = sevenZipPkg.fileNameList();
     for (auto &fn : fileNameList)
     {

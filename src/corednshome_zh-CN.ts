@@ -599,8 +599,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="231"/>
-        <source>GUI configuration tool for &lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;custom build CoreDNS&lt;/a&gt;.&lt;br&gt;Homepage: &lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</source>
-        <translation>用于&lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;自行编译的CoreDNS&lt;/a&gt;的图形用户界面的配置工具。&lt;br&gt;主页：&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</translation>
+        <source>GUI configuration tool for &lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;custom build CoreDNS&lt;/a&gt;.&lt;br&gt;Homepage: &lt;a href=&quot;https://github.com/missdeer/corednshome&quot;&gt;https://github.com/missdeer/corednshome&lt;/a&gt;</source>
+        <translation>用于&lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;自行编译的CoreDNS&lt;/a&gt;的图形用户界面的配置工具。&lt;br&gt;主页：&lt;a href=&quot;https://github.com/missdeer/corednshome&quot;&gt;https://github.com/missdeer/corednshome&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="736"/>
@@ -641,8 +641,8 @@
         <translation>更新CoreDNS二进制文件结束。</translation>
     </message>
     <message>
-        <source>GUI configuration tool for custom build CoreDNS.&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</source>
-        <translation type="vanished">用于自行编译的CoreDNS的图形用户界面的配置工具。&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</translation>
+        <source>GUI configuration tool for custom build CoreDNS.&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednshome&quot;&gt;https://github.com/missdeer/corednshome&lt;/a&gt;</source>
+        <translation type="vanished">用于自行编译的CoreDNS的图形用户界面的配置工具。&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednshome&quot;&gt;https://github.com/missdeer/corednshome&lt;/a&gt;</translation>
     </message>
 </context>
 <context>

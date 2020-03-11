@@ -38,7 +38,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="corednsgui.qrc">:/res/alipay.jpg</pixmap>
+      <pixmap resource="corednshome.qrc">:/res/alipay.jpg</pixmap>
      </property>
     </widget>
    </item>
@@ -48,14 +48,14 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="corednsgui.qrc">:/res/wepay.jpg</pixmap>
+      <pixmap resource="corednshome.qrc">:/res/wepay.jpg</pixmap>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
  <resources>
-  <include location="corednsgui.qrc"/>
+  <include location="corednshome.qrc"/>
  </resources>
  <connections/>
 </ui>

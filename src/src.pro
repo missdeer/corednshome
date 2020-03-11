@@ -1,7 +1,7 @@
 QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-TARGET = corednsgui
+TARGET = corednshome
 CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
@@ -38,8 +38,8 @@ FORMS += \
 
 INCLUDEPATH += $$PWD/../3rdparty/Qt7z/Qt7z/
 win32: {
-    RC_FILE += $$PWD/corednsgui.rc
-    QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
+    RC_FILE += $$PWD/corednshome.rc
+    #QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
     CONFIG(release, debug|release) : {
         LIBS += -L$$OUT_PWD/../3rdparty/Qt7z/Qt7z/release
     } else: {
@@ -74,7 +74,7 @@ macx: {
 }
 
 TRANSLATIONS += \
-    $$PWD/corednsgui_zh-CN.ts
+    $$PWD/corednshome_zh-CN.ts
 
 RESOURCES += \
-    $$PWD/corednsgui.qrc
+    $$PWD/corednshome.qrc

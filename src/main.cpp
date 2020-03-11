@@ -98,18 +98,18 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    if (!translator.load("corednsgui_" + locale, localeDirPath))
+    if (!translator.load("corednshome_" + locale, localeDirPath))
     {
         qDebug() << "loading "
-                 << "corednsgui_" + locale << " from " << localeDirPath << " failed";
+                 << "corednshome_" + locale << " from " << localeDirPath << " failed";
     }
     else
     {
         qDebug() << "loading "
-                 << "corednsgui_" + locale << " from " << localeDirPath << " success";
+                 << "corednshome_" + locale << " from " << localeDirPath << " success";
         if (!a.installTranslator(&translator))
         {
-            qDebug() << "installing corednsgui translator failed ";
+            qDebug() << "installing corednshome translator failed ";
         }
     }
 

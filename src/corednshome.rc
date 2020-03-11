@@ -14,12 +14,12 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "CompanyName", "https://github.com/missdeer"
-            VALUE "FileDescription", "CoreDNS GUI"
+            VALUE "FileDescription", "CoreDNS Home"
             VALUE "FileVersion", "1.0.0.1"
-            VALUE "InternalName", "corednsgui.exe"
+            VALUE "InternalName", "corednshome.exe"
             VALUE "LegalCopyright", "Copyright (C) 2020 https://github.com/missdeer. All rights reserved."
-            VALUE "OriginalFilename", "corednsgui.exe"
-            VALUE "ProductName", "CoreDNS GUI"
+            VALUE "OriginalFilename", "corednshome.exe"
+            VALUE "ProductName", "CoreDNS Home"
             VALUE "ProductVersion", "1.0.0.1"
         END
     END
@@ -31,4 +31,4 @@ END
 
 
 
-IDI_ICON1 ICON DISCARDABLE "corednsgui.ico"
+IDI_ICON1 ICON DISCARDABLE "corednshome.ico"

@@ -2,17 +2,17 @@
 #define NETWORKREPLYHELPER_H
 
 #include <QNetworkReply>
-#include <QObject>
 
 QT_BEGIN_NAMESPACE
 class QTimer;
+class QIODevice;
 QT_END_NAMESPACE
 
 class NetworkReplyHelper : public QObject
 {
     Q_OBJECT
 public:
-    explicit NetworkReplyHelper(QNetworkReply *reply, QObject *parent = nullptr);
+    explicit NetworkReplyHelper(QNetworkReply *reply, QIODevice *storage = nullptr, QObject *parent = nullptr);
     NetworkReplyHelper(const NetworkReplyHelper &) = delete;
     void operator=(const NetworkReplyHelper &) = delete;
     NetworkReplyHelper(NetworkReplyHelper &&)  = delete;
@@ -25,6 +25,10 @@ public:
     [[nodiscard]] QNetworkReply *reply()
     {
         return m_reply;
+    }
+    [[nodiscard]] QIODevice *storage()
+    {
+        return m_storage;
     }
 
     [[nodiscard]] QVariant       data() const;
@@ -50,6 +54,7 @@ private slots:
 
 private:
     QNetworkReply *m_reply {nullptr};
+    QIODevice *    m_storage {nullptr};
     QTimer *       m_timeoutTimer {nullptr};
     QVariant       m_data;
     QByteArray     m_content;
