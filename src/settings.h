@@ -77,16 +77,16 @@ public:
     [[nodiscard]] bool bogusEnabled() const;
     void               setBogusEnabled(bool bogusEnabled);
 
-    [[nodiscard]] const QString &chinaDomainList() const;
+    [[nodiscard]] const QString &chinaDomainList();
     void                         setChinaDomainList(const QString &chinaDomainList);
 
-    [[nodiscard]] const QString &googleDomainList() const;
+    [[nodiscard]] const QString &googleDomainList();
     void                         setGoogleDomainList(const QString &googleDomainList);
 
-    [[nodiscard]] const QString &appleDomainList() const;
+    [[nodiscard]] const QString &appleDomainList();
     void                         setAppleDomainList(const QString &appleDomainList);
 
-    [[nodiscard]] const QString &bogusIPList() const;
+    [[nodiscard]] const QString &bogusIPList();
     void                         setBogusIPList(const QString &bogusIPList);
 
     [[nodiscard]] bool exceptGoogleDomain() const;

@@ -86,6 +86,8 @@ private slots:
 
     void on_cbResolveGoogleDomainByChinaDNS_stateChanged(int state);
 
+    void on_actionUpdateCoreDNSBinary_triggered();
+
 private:
     Ui::MainWindow *ui;
     QProcess *            m_coredns {nullptr};

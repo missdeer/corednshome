@@ -1,3 +1,4 @@
+#include <QFile>
 #include <QSettings>
 
 #include "settings.h"
@@ -214,8 +215,19 @@ void Settings::setBogusEnabled(bool bogusEnabled)
     m_bogusEnabled = bogusEnabled;
 }
 
-const QString &Settings::chinaDomainList() const
+const QString &Settings::chinaDomainList()
 {
+    if (m_chinaDomainList.isEmpty())
+    {
+        // load from resource
+        QFile f(":/res/china.txt");
+        if (f.open(QIODevice::ReadOnly))
+        {
+            QByteArray ba = f.readAll();
+            f.close();
+            m_chinaDomainList = ba;
+        }
+    }
     return m_chinaDomainList;
 }
 
@@ -224,8 +236,19 @@ void Settings::setChinaDomainList(const QString &chinaDomainList)
     m_chinaDomainList = chinaDomainList;
 }
 
-const QString &Settings::googleDomainList() const
+const QString &Settings::googleDomainList()
 {
+    if (m_chinaDomainList.isEmpty())
+    {
+        // load from resource
+        QFile f(":/res/google.txt");
+        if (f.open(QIODevice::ReadOnly))
+        {
+            QByteArray ba = f.readAll();
+            f.close();
+            m_googleDomainList = ba;
+        }
+    }
     return m_googleDomainList;
 }
 
@@ -234,8 +257,19 @@ void Settings::setGoogleDomainList(const QString &googleDomainList)
     m_googleDomainList = googleDomainList;
 }
 
-const QString &Settings::appleDomainList() const
+const QString &Settings::appleDomainList()
 {
+    if (m_chinaDomainList.isEmpty())
+    {
+        // load from resource
+        QFile f(":/res/apple.txt");
+        if (f.open(QIODevice::ReadOnly))
+        {
+            QByteArray ba = f.readAll();
+            f.close();
+            m_appleDomainList = ba;
+        }
+    }
     return m_appleDomainList;
 }
 
@@ -244,8 +278,19 @@ void Settings::setAppleDomainList(const QString &appleDomainList)
     m_appleDomainList = appleDomainList;
 }
 
-const QString &Settings::bogusIPList() const
+const QString &Settings::bogusIPList()
 {
+    if (m_chinaDomainList.isEmpty())
+    {
+        // load from resource
+        QFile f(":/res/bogus.txt");
+        if (f.open(QIODevice::ReadOnly))
+        {
+            QByteArray ba = f.readAll();
+            f.close();
+            m_bogusIPList = ba;
+        }
+    }
     return m_bogusIPList;
 }
 

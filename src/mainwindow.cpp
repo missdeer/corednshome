@@ -665,3 +665,11 @@ void MainWindow::on_cbResolveGoogleDomainByChinaDNS_stateChanged(int state)
     Q_ASSERT(g_settings);
     g_settings->setExceptGoogleDomain(state == Qt::Checked);
 }
+
+void MainWindow::on_actionUpdateCoreDNSBinary_triggered()
+{
+    QString path = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    QDir    d(path);
+    if (!d.exists())
+        d.mkpath(path);
+}

@@ -79,10 +79,10 @@ jobs:
           # 创建文件夹
           New-Item -ItemType Directory ${env:archiveName}
           # 拷贝exe
-          Copy-Item build\Release\${env:targetName}'.exe' ${env:archiveName}\
-          Copy-Item build\Release\*.exe ${env:archiveName}\
-          Copy-Item build\Release\*.dll ${env:archiveName}\
-          Copy-Item build\Release\*.manifest ${env:archiveName}\
+          Copy-Item build\src\Release\${env:targetName}'.exe' ${env:archiveName}\
+          Copy-Item build\src\Release\*.exe ${env:archiveName}\
+          Copy-Item build\src\Release\*.dll ${env:archiveName}\
+          Copy-Item build\src\Release\*.manifest ${env:archiveName}\
           # 拷贝依赖
           windeployqt.exe --qmldir . ${env:archiveName}\${env:targetName}'.exe'
           lrelease corednsgui_zh-CN.ts

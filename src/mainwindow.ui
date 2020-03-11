@@ -1160,6 +1160,8 @@
     </property>
     <addaction name="actionStartCoreDNS"/>
     <addaction name="actionStopCoreDNS"/>
+    <addaction name="separator"/>
+    <addaction name="actionUpdateCoreDNSBinary"/>
    </widget>
    <addaction name="menu_Action"/>
    <addaction name="menu_Action_2"/>
@@ -1237,6 +1239,11 @@
    </property>
    <property name="text">
     <string>Stop CoreDNS</string>
+   </property>
+  </action>
+  <action name="actionUpdateCoreDNSBinary">
+   <property name="text">
+    <string>Update CoreDNS binary</string>
    </property>
   </action>
  </widget>

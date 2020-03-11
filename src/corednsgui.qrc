@@ -7,5 +7,9 @@
         <file>res/wepay.jpg</file>
         <file>res/donate.png</file>
         <file>res/export.png</file>
+        <file>res/apple.txt</file>
+        <file>res/bogus.txt</file>
+        <file>res/china.txt</file>
+        <file>res/google.txt</file>
     </qresource>
 </RCC>
