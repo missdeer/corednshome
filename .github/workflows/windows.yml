@@ -94,7 +94,7 @@ jobs:
           archiveName: CoreDNSGUI-Win
         with:
           path: CoreDNSGUI-Win
-          name: ${env:archiveName}
+          name: CoreDNSGUI-Win-${{ matrix.msvc_arch }}
 
       # tag 打包
       - name: package
