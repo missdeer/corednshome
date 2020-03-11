@@ -85,8 +85,8 @@ jobs:
           Copy-Item build\src\Release\*.manifest ${env:archiveName}\
           # 拷贝依赖
           windeployqt.exe --qmldir . ${env:archiveName}\${env:targetName}'.exe'
-          lrelease corednsgui_zh-CN.ts
-          Copy-Item corednsgui_zh-CN.qm ${env:archiveName}\translations\
+          lrelease src\corednsgui_zh-CN.ts
+          Copy-Item src\corednsgui_zh-CN.qm ${env:archiveName}\translations\
 
       - name: upload artifact
         uses: actions/upload-artifact@v1
