@@ -451,13 +451,23 @@ bool MainWindow::exportCorefile(const QString &corefile)
         QString     host                = g_settings->hostEnabled() ? "hosts {\n\t\tfallthrough\n\t}" : "";
         QStringList abroadDNSServerList = g_settings->abroadDNSServerList();
         abroadDNSServerList.append(g_settings->customAbroadDNSServerList().split(' '));
-        QStringList tlsDNSServerList;
+        QStringList tlsDNSServerList, udpDNSServerList, tcpDNSServerList;
         for (auto &server : abroadDNSServerList)
         {
+            if (server.startsWith("udp://"))
+            {
+                udpDNSServerList.append(server);
+                server = "127.0.0.1:531" + QString::number(udpDNSServerList.size());
+            }
+            if (server.startsWith("tcp://"))
+            {
+                tcpDNSServerList.append(server);
+                server = "127.0.0.1:532" + QString::number(tcpDNSServerList.size());
+            }
             if (server.startsWith("tls://"))
             {
                 tlsDNSServerList.append(server);
-                server = "127.0.0.1:530" + QString::number(tlsDNSServerList.size());
+                server = "127.0.0.1:533" + QString::number(tlsDNSServerList.size());
             }
         }
         QString forwardAbroadDomains = QString("forward . %1 {\n\t\texcept %2 %3 %4\n\t}")
@@ -465,8 +475,10 @@ bool MainWindow::exportCorefile(const QString &corefile)
                                                 g_settings->chinaDomainList(),
                                                 (g_settings->exceptGoogleDomain() ? g_settings->googleDomainList() : ""),
                                                 (g_settings->exceptAppleDomain() ? g_settings->appleDomainList() : ""));
-        QString proxyChinaDomains =
-            QString("proxy . %1 %2").arg(g_settings->chinaDNSServerList().join(' '), g_settings->customChinaDNSServerList()).remove("udp://");
+        QString proxyChinaDomains = QString("proxy . %1 %2")
+                                        .arg(g_settings->chinaDNSServerList().join(' '), g_settings->customChinaDNSServerList())
+                                        .remove("udp://")
+                                        .remove("tcp://");
         QString bogus  = g_settings->bogusIPList().isEmpty() ? "" : "bogus " + g_settings->bogusIPList();
         QString redis  = g_settings->redis().isEmpty() ? "" : QString("redisc {\n\t\tendpoint %1\n\t}").arg(g_settings->redis());
         QString log    = g_settings->logsEnabled() ? "log" : "";
@@ -480,10 +492,23 @@ bool MainWindow::exportCorefile(const QString &corefile)
         f.write(total.toUtf8());
         QRegularExpression regexIPv4("tls:\\/\\/(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}):\\d{1,5}");
         QRegularExpression regexIPv6("tls:\\/\\/\\[([a-z0-9:]+)\\]:\\d{1,5}");
+        for (int i = 0; i < udpDNSServerList.size(); i++)
+        {
+            auto    server = udpDNSServerList.at(i);
+            QString s =
+                QString(".:531%1 {\n\tbind 127.0.0.1\n\tforward . %2 {\n\t\tprefer_udp\n\t}\n\tcache\n}\n").arg(i + 1).arg(server.remove("udp://"));
+            f.write(s.toUtf8());
+        }
+        for (int i = 0; i < tcpDNSServerList.size(); i++)
+        {
+            auto    server = tcpDNSServerList.at(i);
+            QString s =
+                QString(".:532%1 {\n\tbind 127.0.0.1\n\tforward . %2 {\n\t\tforce_tcp\n\t}\n\tcache\n}\n").arg(i + 1).arg(server.remove("tcp://"));
+            f.write(s.toUtf8());
+        }
         for (int i = 0; i < tlsDNSServerList.size(); i++)
         {
-            auto server = tlsDNSServerList.at(i);
-            ui->edtLogs->append(server);
+            auto    server = tlsDNSServerList.at(i);
             QString ipAddr;
             auto    match = regexIPv6.match(server);
             if (match.hasMatch())
@@ -496,12 +521,10 @@ bool MainWindow::exportCorefile(const QString &corefile)
                 else
                     continue;
             }
-            ui->edtLogs->append(ipAddr);
-            QString s = QString(".:530%1 {\n\tbind 127.0.0.1\n\tforward . %2 {\n\t\ttls_servername %3\n\t}\n\tcache\n}\n")
+            QString s = QString(".:533%1 {\n\tbind 127.0.0.1\n\tforward . %2 {\n\t\ttls_servername %3\n\t}\n\tcache\n}\n")
                             .arg(i + 1)
                             .arg(server)
                             .arg(tlsNameMap[ipAddr]);
-            ui->edtLogs->append(tlsNameMap[ipAddr]);
             f.write(s.toUtf8());
         }
 
