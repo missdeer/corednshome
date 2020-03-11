@@ -740,7 +740,7 @@ void MainWindow::onArtifactRequestFinished()
     f->deleteLater();
 
     QString     pkgPath = f->fileName();
-    Qt7zPackage sevenZipPkg(pkgPath);
+    Qt7zPackage sevenZipPkg(QDir::toNativeSeparators(pkgPath));
     if (!sevenZipPkg.open())
     {
         QMessageBox::warning(this, tr("Error"), tr("Opening package %1 failed.").arg(QDir::toNativeSeparators(pkgPath)), QMessageBox::Ok);

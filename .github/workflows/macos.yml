@@ -18,7 +18,7 @@ jobs:
         qt_ver: [5.14.1]
         qt_arch: [clang_64]
     env:
-      targetName: corednsgui
+      targetName: corednshome
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2.0.0
