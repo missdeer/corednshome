@@ -36,6 +36,7 @@ FORMS += \
     $$PWD/mainwindow.ui \
     $$PWD/donatedialog.ui
 
+INCLUDEPATH += $$PWD/../3rdparty/Qt7z/Qt7z/
 win32: {
     RC_FILE += $$PWD/corednsgui.rc
     QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"

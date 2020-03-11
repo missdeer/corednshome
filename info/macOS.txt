@@ -1,0 +1,1 @@
+https://ci.appveyor.com/api/buildjobs/4254gnax379677ai/artifacts/distrib%2Fcoredns-darwin-amd64.7z

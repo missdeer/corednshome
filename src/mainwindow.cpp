@@ -13,6 +13,8 @@
 
 #include "donatedialog.h"
 #include "networkreplyhelper.h"
+#include "qt7zfileinfo.h"
+#include "qt7zpackage.h"
 #include "settings.h"
 #include "ui_mainwindow.h"
 
@@ -125,10 +127,12 @@ MainWindow::MainWindow(QWidget *parent)
     updateAppleDomainList();
     updateGoogleDomainList();
     updateChinaDomainList();
-    m_corefilePath = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/Corefile";
-    QDir d(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
+
+    QString path   = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    m_corefilePath = path + "/Corefile";
+    QDir d(path);
     if (!d.exists())
-        d.mkpath(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
+        d.mkpath(path);
     connect(qApp, &QCoreApplication::aboutToQuit, this, &MainWindow::onAboutToQuit);
 }
 
@@ -154,11 +158,18 @@ void MainWindow::startCoreDNS()
     connect(m_coredns, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &MainWindow::onFinished);
     connect(m_coredns, &QProcess::started, this, &MainWindow::onStarted);
     connect(m_coredns, &QProcess::stateChanged, this, &MainWindow::onStateChanged);
-    QString corednsPath = QCoreApplication::applicationDirPath() +
+    QString corednsPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +
 #ifdef Q_OS_WIN
                           "/coredns.exe";
 #else
                           "/coredns";
+#endif
+    if (!QFile::exists(corednsPath))
+        corednsPath = QCoreApplication::applicationDirPath() +
+#ifdef Q_OS_WIN
+                      "/coredns.exe";
+#else
+                      "/coredns";
 #endif
     m_coredns->setProgram(corednsPath);
     m_coredns->setArguments(QStringList() << "-conf" << QDir::toNativeSeparators(m_corefilePath));
@@ -352,11 +363,7 @@ void MainWindow::updateChinaDomainList()
     request.setHeader(QNetworkRequest::UserAgentHeader,
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader("Referer", "https://godbolt.org/");
-    request.setRawHeader("Accept", "application/json, text/javascript, */*; q=0.01");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setRawHeader("X-Requested-With", "XMLHttpRequest");
     request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
 
     auto *reply       = m_nam.get(request);
@@ -372,11 +379,7 @@ void MainWindow::updateAppleDomainList()
     request.setHeader(QNetworkRequest::UserAgentHeader,
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader("Referer", "https://godbolt.org/");
-    request.setRawHeader("Accept", "application/json, text/javascript, */*; q=0.01");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setRawHeader("X-Requested-With", "XMLHttpRequest");
     request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
 
     auto *reply       = m_nam.get(request);
@@ -392,11 +395,7 @@ void MainWindow::updateGoogleDomainList()
     request.setHeader(QNetworkRequest::UserAgentHeader,
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader("Referer", "https://godbolt.org/");
-    request.setRawHeader("Accept", "application/json, text/javascript, */*; q=0.01");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setRawHeader("X-Requested-With", "XMLHttpRequest");
     request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
 
     auto *reply       = m_nam.get(request);
@@ -668,8 +667,122 @@ void MainWindow::on_cbResolveGoogleDomainByChinaDNS_stateChanged(int state)
 
 void MainWindow::on_actionUpdateCoreDNSBinary_triggered()
 {
+#if defined(Q_OS_WIN)
+#    if defined(_WIN64)
+    QUrl u("https://raw.githubusercontent.com/missdeer/corednsgui/master/info/win64.txt");
+#    else
+    QUrl u("https://raw.githubusercontent.com/missdeer/corednsgui/master/info/win32.txt");
+#    endif
+#elif defined(Q_OS_MAC)
+    QUrl u("https://raw.githubusercontent.com/missdeer/corednsgui/master/info/macOS.txt");
+#elif defined(Q_OS_LINUX)
+    QUrl u("https://raw.githubusercontent.com/missdeer/corednsgui/master/info/linux.txt");
+#else
+#endif
+
+    QNetworkRequest request(u);
+    request.setHeader(QNetworkRequest::UserAgentHeader,
+                      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
+                      "Gecko/20100101 Firefox/55.0");
+    request.setRawHeader("Accept-Encoding", "gzip, deflate");
+    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
+
+    auto *reply       = m_nam.get(request);
+    auto *replyHelper = new NetworkReplyHelper(reply);
+    replyHelper->setTimeout(30000);
+    connect(replyHelper, SIGNAL(done()), this, SLOT(onInfoRequestFinished()));
+}
+
+void MainWindow::onInfoRequestFinished()
+{
+    auto *reply = qobject_cast<NetworkReplyHelper *>(sender());
+    Q_ASSERT(reply);
+    reply->deleteLater();
+
+    QByteArray &content = reply->content();
+
+    QUrl u(content);
+    if (!u.isValid())
+        return;
+
+    QNetworkRequest request(u);
+    request.setHeader(QNetworkRequest::UserAgentHeader,
+                      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
+                      "Gecko/20100101 Firefox/55.0");
+    request.setRawHeader("Accept-Encoding", "gzip, deflate");
+    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, QVariant(true));
+
+    auto *r           = m_nam.get(request);
+    auto *replyHelper = new NetworkReplyHelper(r);
+    connect(replyHelper, SIGNAL(done()), this, SLOT(onArtifactRequestFinished()));
+}
+
+void MainWindow::onArtifactRequestFinished()
+{
+    auto *reply = qobject_cast<NetworkReplyHelper *>(sender());
+    Q_ASSERT(reply);
+    reply->deleteLater();
+
+    QByteArray &content = reply->content();
+    // save as coredns.7z then uncompress it
     QString path = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
     QDir    d(path);
     if (!d.exists())
         d.mkpath(path);
+    QString pkgPath = path + "/coredns.7z";
+    QFile   f(pkgPath);
+    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        QMessageBox::warning(this, tr("Error"), tr("Saving package to %1 failed.").arg(QDir::toNativeSeparators(pkgPath)), QMessageBox::Ok);
+        return;
+    }
+    f.write(content);
+    f.close();
+
+    Qt7zPackage sevenZipPkg(pkgPath);
+    if (!sevenZipPkg.open())
+    {
+        QMessageBox::warning(this, tr("Error"), tr("Opening package %1 failed.").arg(QDir::toNativeSeparators(pkgPath)), QMessageBox::Ok);
+        return;
+    }
+
+    QStringList fileNameList = sevenZipPkg.fileNameList();
+    for (auto &fn : fileNameList)
+    {
+        if (fn.endsWith("coredns.exe.manifest"))
+        {
+            QFile f(path + "/coredns.exe.manifest");
+            if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
+            {
+                QMessageBox::warning(
+                    this, tr("Error"), tr("Saving %1\\coredns.exe.manifest failed.").arg(QDir::toNativeSeparators(path)), QMessageBox::Ok);
+                continue;
+            }
+            sevenZipPkg.extractFile(fn, &f);
+            f.close();
+        }
+#if defined(Q_OS_WIN)
+        if (fn.endsWith("coredns.exe"))
+        {
+            QFile f(path + "/coredns.exe");
+#else
+        if (fn.endsWith("coredns"))
+        {
+            QFile f(path + "/coredns");
+#endif
+            if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
+            {
+                QMessageBox::warning(
+                    this, tr("Error"), tr("Saving coredns binary to %1 failed.").arg(QDir::toNativeSeparators(path)), QMessageBox::Ok);
+                continue;
+            }
+            sevenZipPkg.extractFile(fn, &f);
+            f.close();
+        }
+    }
+
+    if (sevenZipPkg.isOpen())
+        sevenZipPkg.close();
+
+    QMessageBox::information(this, tr("Notice"), tr("Updating CoreDNS binary finished."), QMessageBox::Ok);
 }

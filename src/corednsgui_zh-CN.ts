@@ -395,6 +395,11 @@
         <translation>127.0.0.1:6379，不需要则留空</translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="1246"/>
+        <source>Update CoreDNS binary</source>
+        <translation>更新CoreDNS二进制文件</translation>
+    </message>
+    <message>
         <location filename="mainwindow.ui" line="148"/>
         <location filename="mainwindow.ui" line="180"/>
         <location filename="mainwindow.ui" line="194"/>
@@ -523,79 +528,117 @@
         <translation>操作</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1171"/>
+        <location filename="mainwindow.ui" line="1173"/>
         <source>toolBar</source>
         <translation>工具栏</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1193"/>
+        <location filename="mainwindow.ui" line="1195"/>
         <source>Export Corefile...</source>
         <translation>导出Corefile...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1198"/>
+        <location filename="mainwindow.ui" line="1200"/>
         <source>Exit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1203"/>
+        <location filename="mainwindow.ui" line="1205"/>
         <source>&amp;Homepage...</source>
         <translation>主页...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1212"/>
+        <location filename="mainwindow.ui" line="1214"/>
         <source>&amp;Donate...</source>
         <translation>捐赠...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1221"/>
+        <location filename="mainwindow.ui" line="1223"/>
         <source>&amp;About...</source>
         <translation>关于...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1230"/>
+        <location filename="mainwindow.ui" line="1232"/>
         <source>Start CoreDNS</source>
         <translation>启动CoreDNS</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1239"/>
+        <location filename="mainwindow.ui" line="1241"/>
         <source>Stop CoreDNS</source>
         <translation>停止CoreDNS</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="176"/>
+        <location filename="mainwindow.cpp" line="196"/>
         <source>Export Corefile</source>
         <translation>导出Corefile</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="182"/>
+        <location filename="mainwindow.cpp" line="202"/>
         <source>Corefile exported</source>
         <translation>Corefile已导出</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="182"/>
+        <location filename="mainwindow.cpp" line="202"/>
         <source>Configurations have been exported to %1.</source>
         <translation>配置被导出到%1。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="187"/>
+        <location filename="mainwindow.cpp" line="207"/>
         <source>Exporting failed</source>
         <translation>导出失败</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="187"/>
+        <location filename="mainwindow.cpp" line="207"/>
         <source>Exporting configurations to %1 failed.</source>
         <translation>导出配置到%1失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="210"/>
+        <location filename="mainwindow.cpp" line="230"/>
         <source>About CoreDNS GUI</source>
         <translation>关于CoreDNS图形用户界面</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="211"/>
+        <location filename="mainwindow.cpp" line="231"/>
         <source>GUI configuration tool for &lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;custom build CoreDNS&lt;/a&gt;.&lt;br&gt;Homepage: &lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</source>
         <translation>用于&lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;自行编译的CoreDNS&lt;/a&gt;的图形用户界面的配置工具。&lt;br&gt;主页：&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="736"/>
+        <location filename="mainwindow.cpp" line="745"/>
+        <location filename="mainwindow.cpp" line="758"/>
+        <location filename="mainwindow.cpp" line="776"/>
+        <source>Error</source>
+        <translation>错误</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="736"/>
+        <source>Saving package to %1 failed.</source>
+        <translation>保存包到%1失败。</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="745"/>
+        <source>Opening package %1 failed.</source>
+        <translation>打开包%1失败。</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="758"/>
+        <source>Saving %1\coredns.exe.manifest failed.</source>
+        <translation>保存%\coredns.exe.manifest失败。</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="776"/>
+        <source>Saving coredns binary to %1 failed.</source>
+        <translation>保存CoreDNS二进制文件到%1失败。</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="787"/>
+        <source>Notice</source>
+        <translation>提醒</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="787"/>
+        <source>Updating CoreDNS binary finished.</source>
+        <translation>更新CoreDNS二进制文件结束。</translation>
     </message>
     <message>
         <source>GUI configuration tool for custom build CoreDNS.&lt;br&gt;&lt;a href=&quot;https://github.com/missdeer/corednsgui&quot;&gt;https://github.com/missdeer/corednsgui&lt;/a&gt;</source>

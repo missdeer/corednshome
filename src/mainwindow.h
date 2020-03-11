@@ -20,6 +20,8 @@ public:
     void startCoreDNS();
     void stopCoreDNS();
 private slots:
+    void onInfoRequestFinished();
+    void onArtifactRequestFinished();
     void onAboutToQuit();
     void onChinaDomainRequestFinished();
     void onGoogleDomainRequestFinished();
