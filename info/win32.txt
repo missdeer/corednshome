@@ -1,1 +1,1 @@
-https://ci.appveyor.com/api/buildjobs/o8ol6jgnx7v7amqy/artifacts/distrib%2Fcoredns-windows-386.7z
+https://ci.appveyor.com/api/buildjobs/dmdn6dnq3i84dfgw/artifacts/distrib%2Fcoredns-windows-386.zip

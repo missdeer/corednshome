@@ -11,10 +11,10 @@
 
 #include "mainwindow.h"
 
+#include <private/qzipreader_p.h>
+
 #include "donatedialog.h"
 #include "networkreplyhelper.h"
-#include "qt7zfileinfo.h"
-#include "qt7zpackage.h"
 #include "settings.h"
 #include "ui_mainwindow.h"
 
@@ -739,36 +739,18 @@ void MainWindow::onArtifactRequestFinished()
     f->close();
     f->deleteLater();
 
-    QString     pkgPath = f->fileName();
-    Qt7zPackage sevenZipPkg(QDir::toNativeSeparators(pkgPath));
-    if (!sevenZipPkg.open())
+    auto       pkgPath = f->fileName();
+    QZipReader pkgReader(pkgPath);
+    auto       path         = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    auto       fileNameList = pkgReader.fileInfoList();
+    for (auto &fi : fileNameList)
     {
-        QMessageBox::warning(this, tr("Error"), tr("Opening package %1 failed.").arg(QDir::toNativeSeparators(pkgPath)), QMessageBox::Ok);
-        return;
-    }
-
-    QString     path         = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-    QStringList fileNameList = sevenZipPkg.fileNameList();
-    for (auto &fn : fileNameList)
-    {
-        if (fn.endsWith("coredns.exe.manifest"))
-        {
-            QFile f(path + "/coredns.exe.manifest");
-            if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
-            {
-                QMessageBox::warning(
-                    this, tr("Error"), tr("Saving %1\\coredns.exe.manifest failed.").arg(QDir::toNativeSeparators(path)), QMessageBox::Ok);
-                continue;
-            }
-            sevenZipPkg.extractFile(fn, &f);
-            f.close();
-        }
 #if defined(Q_OS_WIN)
-        if (fn.endsWith("coredns.exe"))
+        if (fi.filePath.endsWith("coredns.exe"))
         {
             QFile f(path + "/coredns.exe");
 #else
-        if (fn.endsWith("coredns"))
+        if (fi.filePath.endsWith("coredns"))
         {
             QFile f(path + "/coredns");
 #endif
@@ -778,13 +760,13 @@ void MainWindow::onArtifactRequestFinished()
                     this, tr("Error"), tr("Saving coredns binary to %1 failed.").arg(QDir::toNativeSeparators(path)), QMessageBox::Ok);
                 continue;
             }
-            sevenZipPkg.extractFile(fn, &f);
+            f.write(pkgReader.fileData(fi.filePath));
             f.close();
         }
     }
 
-    if (sevenZipPkg.isOpen())
-        sevenZipPkg.close();
+    if (pkgReader.isReadable())
+        pkgReader.close();
 
     QMessageBox::information(this, tr("Notice"), tr("Updating CoreDNS binary finished."), QMessageBox::Ok);
 }
