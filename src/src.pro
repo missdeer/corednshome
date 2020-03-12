@@ -36,33 +36,9 @@ FORMS += \
     $$PWD/mainwindow.ui \
     $$PWD/donatedialog.ui
 
-INCLUDEPATH += $$PWD/../3rdparty/Qt7z/Qt7z/
 win32: {
     RC_FILE += $$PWD/corednshome.rc
     #QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
-    CONFIG(release, debug|release) : {
-        LIBS += -L$$OUT_PWD/../3rdparty/Qt7z/Qt7z/release
-    } else: {
-        LIBS += -L$$OUT_PWD/../3rdparty/Qt7z/Qt7z/debug 
-    }
-    DEFINES += QT7Z_STATIC_LINK \
-                WIN_LONG_PATH \
-                _7ZIP_LARGE_PAGES \
-                SUPPORT_DEVICE_FILE \
-                QT7Z_STATIC \
-                QTRAR_STATIC
-    LIBS += -lQt7z -lAdvApi32 -lOleAut32 -lUser32 -lShell32 -lPowrProf -lOle32 -lUuid
-} else: {
-    DEFINES += QT7Z_STATIC_LINK \
-                _FILE_OFFSET_BITS=64 \
-                _LARGEFILE_SOURCE \
-                _REENTRANT \
-                ENV_UNIX \
-                BREAK_HANDLER \
-                UNICODE \
-                _UNICODE \
-                UNIX_USE_WIN_FILE
-    LIBS += -L$$OUT_PWD/3rdparty/Qt7z/Qt7z -lQt7z
 }
 
 macx: {

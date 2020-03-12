@@ -715,7 +715,7 @@ void MainWindow::onInfoRequestFinished()
     QDir    d(path);
     if (!d.exists())
         d.mkpath(path);
-    QString pkgPath = path + "/coredns.7z";
+    QString pkgPath = path + "/coredns.zip";
     auto *  f       = new QFile(pkgPath);
     if (!f->open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
@@ -745,6 +745,7 @@ void MainWindow::onArtifactRequestFinished()
     auto       fileNameList = pkgReader.fileInfoList();
     for (auto &fi : fileNameList)
     {
+        qDebug() << fi.filePath;
 #if defined(Q_OS_WIN)
         if (fi.filePath.endsWith("coredns.exe"))
         {
@@ -760,7 +761,9 @@ void MainWindow::onArtifactRequestFinished()
                     this, tr("Error"), tr("Saving coredns binary to %1 failed.").arg(QDir::toNativeSeparators(path)), QMessageBox::Ok);
                 continue;
             }
-            f.write(pkgReader.fileData(fi.filePath));
+            QByteArray ba = pkgReader.fileData(fi.filePath);
+            qDebug() << ba.length();
+            f.write(ba);
             f.close();
         }
     }
