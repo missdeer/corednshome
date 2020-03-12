@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setSetuidAllowed(true);
 #endif
     QCoreApplication::setOrganizationName(QLatin1String("minidump.info"));
-    QCoreApplication::setApplicationName(QObject::tr("CoreDNS-Home"));
+    QCoreApplication::setApplicationName("CoreDNS-Home");
     QCoreApplication::setApplicationVersion(QLatin1String("1.0"));
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
