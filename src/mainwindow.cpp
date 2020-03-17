@@ -696,7 +696,7 @@ void MainWindow::onInfoRequestFinished()
 
     QByteArray &content = reply->content();
 
-    QUrl u(content);
+    QUrl u = QUrl::fromUserInput(content);
     if (!u.isValid())
     {
         QMessageBox::warning(this, tr("Error"), tr("Invalid CoreDNS binary URL %1").arg(u.toString()), QMessageBox::Ok);
