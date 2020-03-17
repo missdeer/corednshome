@@ -1,1 +1,1 @@
-https://ci.appveyor.com/api/buildjobs/x18swwbow355qkwd/artifacts/distrib%2Fcoredns-windows-amd64.zip
+https://ci.appveyor.com/api/buildjobs/bia7kt7214gb0y1o/artifacts/distrib%2Fcoredns-windows-amd64.zip
