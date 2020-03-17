@@ -38,7 +38,7 @@ FORMS += \
 
 win32: {
     RC_FILE += $$PWD/corednshome.rc
-    #QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
+    QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
 }
 
 macx: {
