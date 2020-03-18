@@ -5,9 +5,8 @@
 #include <QtCore>
 
 #ifdef Q_OS_MAC
-#    include <Authorization.h>
-
-#    include <mach-o/dyld.h>
+#include <Security/Authorization.h>
+#include <mach-o/dyld.h>
 #endif
 
 #include "mainwindow.h"
