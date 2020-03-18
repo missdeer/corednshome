@@ -15,6 +15,7 @@
 
 #include "donatedialog.h"
 #include "networkreplyhelper.h"
+#include "scopedguard.h"
 #include "settings.h"
 #include "ui_mainwindow.h"
 
@@ -663,6 +664,7 @@ void MainWindow::on_cbResolveGoogleDomainByChinaDNS_stateChanged(int state)
 
 void MainWindow::on_actionUpdateCoreDNSBinary_triggered()
 {
+    ui->actionUpdateCoreDNSBinary->setEnabled(false);
 #if defined(Q_OS_WIN)
 #    if defined(_WIN64)
     QUrl u("https://cdn.jsdelivr.net/gh/missdeer/corednshome@master/info/win64.txt");
@@ -700,6 +702,7 @@ void MainWindow::onInfoRequestFinished()
     if (!u.isValid())
     {
         QMessageBox::warning(this, tr("Error"), tr("Invalid CoreDNS binary URL %1").arg(u.toString()), QMessageBox::Ok);
+        ui->actionUpdateCoreDNSBinary->setEnabled(true);
         return;
     }
 
@@ -720,6 +723,7 @@ void MainWindow::onInfoRequestFinished()
     if (!f->open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
         QMessageBox::warning(this, tr("Error"), tr("Saving package to %1 failed.").arg(QDir::toNativeSeparators(pkgPath)), QMessageBox::Ok);
+        ui->actionUpdateCoreDNSBinary->setEnabled(true);
         return;
     }
 
@@ -739,13 +743,15 @@ void MainWindow::onArtifactRequestFinished()
     f->close();
     f->deleteLater();
 
+    ScopedGuard sg([this] { ui->actionUpdateCoreDNSBinary->setEnabled(true); });
+
     auto       pkgPath = f->fileName();
     QZipReader pkgReader(pkgPath);
     auto       path         = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
     auto       fileNameList = pkgReader.fileInfoList();
+    bool       gotBinary    = false;
     for (auto &fi : fileNameList)
     {
-        qDebug() << fi.filePath;
 #if defined(Q_OS_WIN)
         if (fi.filePath.endsWith("coredns.exe"))
         {
@@ -758,18 +764,22 @@ void MainWindow::onArtifactRequestFinished()
             if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
             {
                 QMessageBox::warning(
-                    this, tr("Error"), tr("Saving coredns binary to %1 failed.").arg(QDir::toNativeSeparators(path)), QMessageBox::Ok);
+                    this, tr("Error"), tr("Saving CoreDNS binary to %1 failed.").arg(QDir::toNativeSeparators(path)), QMessageBox::Ok);
                 continue;
             }
             QByteArray ba = pkgReader.fileData(fi.filePath);
-            qDebug() << ba.length();
             f.write(ba);
             f.close();
+            gotBinary = true;
         }
     }
 
     if (pkgReader.isReadable())
         pkgReader.close();
+    QFile::remove(pkgPath);
 
-    QMessageBox::information(this, tr("Notice"), tr("Updating CoreDNS binary finished."), QMessageBox::Ok);
+    if (gotBinary)
+        QMessageBox::information(this, tr("Notice"), tr("Updating CoreDNS binary finished."), QMessageBox::Ok);
+    else
+        QMessageBox::warning(this, tr("Error"), tr("Updating CoreDNS binary failed."), QMessageBox::Ok);
 }
