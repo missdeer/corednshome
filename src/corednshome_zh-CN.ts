@@ -607,7 +607,7 @@
     <message>
         <location filename="mainwindow.cpp" line="702"/>
         <location filename="mainwindow.cpp" line="722"/>
-        <location filename="mainwindow.cpp" line="760"/>
+        <location filename="mainwindow.cpp" line="761"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
@@ -630,17 +630,17 @@
         <translation type="vanished">保存%\coredns.exe.manifest失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="760"/>
+        <location filename="mainwindow.cpp" line="761"/>
         <source>Saving coredns binary to %1 failed.</source>
         <translation>保存CoreDNS二进制文件到%1失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="771"/>
+        <location filename="mainwindow.cpp" line="774"/>
         <source>Notice</source>
         <translation>提醒</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="771"/>
+        <location filename="mainwindow.cpp" line="774"/>
         <source>Updating CoreDNS binary finished.</source>
         <translation>更新CoreDNS二进制文件结束。</translation>
     </message>
