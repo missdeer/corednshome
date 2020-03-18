@@ -1,0 +1,1 @@
+https://ci.appveyor.com/api/buildjobs/54edmyx4tc8q4unm/artifacts/distrib%2Fcoredns-linux-amd64.zip
