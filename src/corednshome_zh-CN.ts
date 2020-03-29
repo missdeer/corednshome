@@ -6,7 +6,7 @@
     <message>
         <location filename="donatedialog.ui" line="14"/>
         <source>Donate</source>
-        <translation>捐赠</translation>
+        <translation>捐助</translation>
     </message>
 </context>
 <context>
@@ -398,7 +398,7 @@
     <message>
         <location filename="mainwindow.ui" line="1221"/>
         <source>&amp;Donate via Alipay/Wechat...</source>
-        <translation>通过支付宝或微信捐且...</translation>
+        <translation>通过支付宝或微信捐助...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1257"/>
