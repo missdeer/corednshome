@@ -21,6 +21,83 @@
 
 namespace
 {
+    // data from https://www.ip.cn/dns.html
+    static std::map<QString, QString> chinaDNSServers = {
+        {"114.114.114.114", "114 DNS"},
+        {"114.114.115.115", "114 DNS"},
+        {"223.5.5.5", "阿里 AliDNS"},
+        {"223.6.6.6", "阿里 AliDNS"},
+        {"180.76.76.76", "百度 BaiduDNS"},
+        {"119.29.29.29", "DNSPod DNS+"},
+        {"182.254.116.116", "DNSPod DNS+"},
+        {"1.2.4.8", "CNNIC SDNS"},
+        {"210.2.4.8", "CNNIC SDNS"},
+    };
+
+    static std::map<QString, QString> abroadDNSServers = {
+        {"dns://208.67.222.222:443", "OpenDNS"},
+        {"dns://208.67.222.222:5353", "OpenDNS"},
+        {"dns://208.67.220.220:443", "OpenDNS"},
+        {"dns://208.67.220.220:5353", "OpenDNS"},
+        {"tcp://8.8.8.8", "Google DNS"},
+        {"tcp://8.8.4.4", "Google DNS"},
+        {"udp://8.8.8.8:443", "Google DNS"},
+        {"udp://8.8.4.4:443", "Google DNS"},
+        {"tls://1.1.1.1:853", "Cloudflare DNS"},
+        {"tls://1.0.0.1:853", "Cloudflare DNS"},
+        {"tls://8.8.8.8:853", "Google DNS"},
+        {"tls://8.8.4.4:853", "Google DNS"},
+        {"tls://9.9.9.9:853", "IBM Quad9"},
+        {"tls://9.9.9.10:853", "IBM Quad9"},
+        {"tls://145.100.185.15:853", "dnsovertls.sinodun.com"},
+        {"tls://145.100.185.16:853", "dnsovertls1.sinodun.com"},
+        {"tls://145.100.185.17:853", "dnsovertls2.sinodun.com"},
+        {"tls://145.100.185.18:853", "dnsovertls3.sinodun.com"},
+        {"tls://185.49.141.37:853", "getdnsapi.net"},
+        {"tls://89.233.43.71:853", "unicast.censurfridns.dk"},
+        {"tls://158.64.1.29:853", "kaitain.restena.lu"},
+        {"tls://176.103.130.130:853", "dns.adguard.com"},
+        {"tls://176.103.130.131:853", "dns.adguard.com"},
+        {"tls://176.103.130.132:853", "dns-family.adguard.com"},
+        {"tls://176.103.130.134:853", "dns-family.adguard.com"},
+        {"tls://199.58.81.218:853", "dns.cmrg.net"},
+        {"tls://51.15.70.167:853", "dns.larsdebruin.net"},
+        {"tls://146.185.167.43:853", "dot.securedns.eu"},
+        {"tls://81.187.221.24:853", "dns-tls.bitwiseshift.net"},
+        {"tls://94.130.110.185:853", "ns1.dnsprivacy.at"},
+        {"tls://94.130.110.178:853", "ns2.dnsprivacy.at"},
+        {"tls://139.59.51.46:853", "dns.bitgeek.in"},
+        {"tls://89.234.186.112:853", "dns.neutopia.org"},
+        {"tls://93.177.65.183:853", "dot1.applied-privacy.net"},
+        {"tls://184.105.193.78:853", "tls-dns-u.odvr.dns-oarc.net"},
+        // ipv6
+        {"tls://[2001:610:1:40ba:145:100:185:15]:853", "dnsovertls.sinodun.com"},
+        {"tls://[2001:610:1:40ba:145:100:185:16]:853", "dnsovertls1.sinodun.com"},
+        {"tls://[2a04:b900:0:100::38]:853", "getdnsapi.net"},
+        {"tls://[2620:fe::fe]:853", "dns.quad9.net"},
+        {"tls://[2620:fe::10]:853", "dns.quad9.net"},
+        {"tls://[2606:4700:4700::1111]:853", "cloudflare-dns.com"},
+        {"tls://[2606:4700:4700::1001]:853", "cloudflare-dns.com"},
+        {"tls://[2001:4860:4860::8888]:853", "dns.google"},
+        {"tls://[2001:4860:4860::8844]:853", "dns.google"},
+        {"tls://[2a00:5a60::ad1:0ff]:853", "dns.adguard.com"},
+        {"tls://[2a00:5a60::ad2:0ff]:853", "dns.adguard.com"},
+        {"tls://[2a00:5a60::bad1:0ff]:853", "dns-family.adguard.com"},
+        {"tls://[2a00:5a60::bad2:0ff]:853", "dns-family.adguard.com"},
+        {"tls://[2a01:3a0:53:53::0]:853", "unicast.censurfridns.dk"},
+        {"tls://[2001:a18:1::29]:853", "kaitain.restena.lu"},
+        {"tls://[2001:610:1:40ba:145:100:185:18]:853", "dnsovertls3.sinodun.com"},
+        {"tls://[2001:610:1:40ba:145:100:185:17]:853", "dnsovertls2.sinodun.com"},
+        {"tls://[2001:470:1c:76d::53]:853", "dns.cmrg.net"},
+        {"tls://[2a03:b0c0:0:1010::e9a:3001]:853", "dot.securedns.eu"},
+        {"tls://[2001:8b0:24:24::24]:853", "dns-tls.bitwiseshift.net"},
+        {"tls://[2a01:4f8:c0c:3c03::2]:853", "ns1.dnsprivacy.at"},
+        {"tls://[2a01:4f8:c0c:3bfc::2]:853", "ns2.dnsprivacy.at"},
+        {"tls://[2001:67c:27e4::35]:853", "privacydns.go6lab.si"},
+        {"tls://[2a00:5884:8209::2]:853", "dns.neutopia.org"},
+        {"tls://[2a03:4000:38:53c::2]:853", "dot1.applied-privacy.net"},
+        {"tls://[2620:ff:c000:0:1::64:25]:853", "tls-dns-u.odvr.dns-oarc.net"},
+    };
     // data from https://github.com/getdnsapi/stubby/blob/develop/stubby.yml.example
     static std::map<QString, QString> tlsNameMap = {
         // ipv4
@@ -109,19 +186,32 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionStartCoreDNS->setEnabled(!m_isCoreDNSStarted);
     ui->actionStopCoreDNS->setEnabled(m_isCoreDNSStarted);
 
+    // fill China DNS server list
     auto servers = g_settings->chinaDNSServerList();
-    for (const auto &server : servers)
+    for (const auto &[ip, tooltip] : chinaDNSServers)
     {
-        auto items = ui->listChinaDNSServers->findItems(server, Qt::MatchFixedString);
-        for (auto item : items)
+        auto *item = new QListWidgetItem(ip, ui->listChinaDNSServers);
+        item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+        item->setToolTip(tooltip);
+        ui->listChinaDNSServers->addItem(item);
+        if (servers.contains(ip))
             item->setCheckState(Qt::Checked);
+        else
+            item->setCheckState(Qt::Unchecked);
     }
+
+    // fill abroad DNS server list
     servers = g_settings->abroadDNSServerList();
-    for (const auto &server : servers)
+    for (const auto &[ip, tooltip] : abroadDNSServers)
     {
-        auto items = ui->listAbroadDNSServers->findItems(server, Qt::MatchFixedString);
-        for (auto item : items)
+        auto *item = new QListWidgetItem(ip, ui->listAbroadDNSServers);
+        item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+        item->setToolTip(tooltip);
+        ui->listAbroadDNSServers->addItem(item);
+        if (servers.contains(ip))
             item->setCheckState(Qt::Checked);
+        else
+            item->setCheckState(Qt::Unchecked);
     }
 
     updateBogusList();
