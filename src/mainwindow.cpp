@@ -452,29 +452,47 @@ bool MainWindow::exportCorefile(const QString &corefile)
         {
             if (server.startsWith("udp://"))
             {
+                // check if tcp exists
+                QString s     = server.replace("udp://", "tcp://");
+                int     index = abroadDNSServerList.indexOf(s);
+                if (index >= 0)
+                {
+                    server = s.mid(6);
+                    abroadDNSServerList.replace(index, server);
+                    continue;
+                }
+            }
+            if (server.startsWith("udp://"))
+            {
                 udpDNSServerList.append(server);
                 server = "127.0.0.1:531" + QString::number(udpDNSServerList.size());
+                continue;
             }
             if (server.startsWith("tcp://"))
             {
                 tcpDNSServerList.append(server);
                 server = "127.0.0.1:532" + QString::number(tcpDNSServerList.size());
+                continue;
             }
             if (server.startsWith("tls://"))
             {
                 tlsDNSServerList.append(server);
                 server = "127.0.0.1:533" + QString::number(tlsDNSServerList.size());
+                continue;
             }
         }
+        abroadDNSServerList.removeDuplicates();
         QString forwardAbroadDomains = QString("forward . %1 {\n\t\texcept %2 %3 %4\n\t}")
-                                           .arg(abroadDNSServerList.join(' ').remove("udp://"),
+                                           .arg(abroadDNSServerList.join(' ').remove("udp://").remove("dns://"),
                                                 g_settings->chinaDomainList(),
                                                 (g_settings->exceptGoogleDomain() ? g_settings->googleDomainList() : ""),
                                                 (g_settings->exceptAppleDomain() ? g_settings->appleDomainList() : ""));
-        QString proxyChinaDomains = QString("proxy . %1 %2")
-                                        .arg(g_settings->chinaDNSServerList().join(' '), g_settings->customChinaDNSServerList())
-                                        .remove("udp://")
-                                        .remove("tcp://");
+        QString proxyChinaDomains =
+            QString("proxy . %1 %2")
+                .arg(g_settings->chinaDNSServerList().join(' ').remove("udp://").remove("dns://"), g_settings->customChinaDNSServerList())
+                .remove("udp://")
+                .remove("dns://")
+                .remove("tcp://");
         QString bogus  = g_settings->bogusIPList().isEmpty() ? "" : "bogus " + g_settings->bogusIPList();
         QString redis  = g_settings->redis().isEmpty() ? "" : QString("redisc {\n\t\tendpoint %1\n\t}").arg(g_settings->redis());
         QString log    = g_settings->logsEnabled() ? "log" : "";
