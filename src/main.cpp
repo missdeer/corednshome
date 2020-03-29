@@ -78,8 +78,8 @@ int main(int argc, char *argv[])
 
     if (!QSslSocket::supportsSsl())
     {
-        QMessageBox::critical(nullptr, QObject::tr("Critical error"), QObject::tr("SSL not supported, exit now."), QMessageBox::Ok);
-        return 1;
+        QMessageBox::critical(
+            nullptr, QObject::tr("Critical error"), QObject::tr("SSL not supported, some features may stop working."), QMessageBox::Ok);
     }
 
     QString     locale = QLocale().uiLanguages()[0];

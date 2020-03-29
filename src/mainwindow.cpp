@@ -359,6 +359,10 @@ void MainWindow::onStateChanged(QProcess::ProcessState newState)
 
 void MainWindow::updateChinaDomainList()
 {
+    if (!QSslSocket::supportsSsl())
+    {
+        return;
+    }
     QUrl            u("https://cdn.jsdelivr.net/gh/felixonmars/dnsmasq-china-list@master/accelerated-domains.china.conf");
     QNetworkRequest request(u);
     request.setHeader(QNetworkRequest::UserAgentHeader,
@@ -374,6 +378,11 @@ void MainWindow::updateChinaDomainList()
 
 void MainWindow::updateAppleDomainList()
 {
+    if (!QSslSocket::supportsSsl())
+    {
+        return;
+    }
+
     QUrl            u("https://cdn.jsdelivr.net/gh/felixonmars/dnsmasq-china-list@master/apple.china.conf");
     QNetworkRequest request(u);
     request.setHeader(QNetworkRequest::UserAgentHeader,
@@ -389,6 +398,10 @@ void MainWindow::updateAppleDomainList()
 
 void MainWindow::updateGoogleDomainList()
 {
+    if (!QSslSocket::supportsSsl())
+    {
+        return;
+    }
     QUrl            u("https://cdn.jsdelivr.net/gh/felixonmars/dnsmasq-china-list@master/google.china.conf");
     QNetworkRequest request(u);
     request.setHeader(QNetworkRequest::UserAgentHeader,
@@ -404,6 +417,10 @@ void MainWindow::updateGoogleDomainList()
 
 void MainWindow::updateBogusList()
 {
+    if (!QSslSocket::supportsSsl())
+    {
+        return;
+    }
     QUrl            u("https://cdn.jsdelivr.net/gh/felixonmars/dnsmasq-china-list@master/bogus-nxdomain.china.conf");
     QNetworkRequest request(u);
     request.setHeader(QNetworkRequest::UserAgentHeader,
@@ -682,6 +699,12 @@ void MainWindow::on_cbResolveGoogleDomainByChinaDNS_stateChanged(int state)
 
 void MainWindow::on_actionUpdateCoreDNSBinary_triggered()
 {
+    if (!QSslSocket::supportsSsl())
+    {
+        QMessageBox::critical(
+            nullptr, QObject::tr("Critical error"), QObject::tr("SSL not supported, cannot update CoreDNS binary."), QMessageBox::Ok);
+        return;
+    }
     ui->actionUpdateCoreDNSBinary->setEnabled(false);
 #if defined(Q_OS_WIN)
 #    if defined(_WIN64)
