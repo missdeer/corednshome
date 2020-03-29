@@ -605,30 +605,30 @@
         <translation>用于&lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;自行编译的CoreDNS&lt;/a&gt;的图形用户界面的配置工具。&lt;br&gt;主页：&lt;a href=&quot;https://github.com/missdeer/corednshome&quot;&gt;https://github.com/missdeer/corednshome&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="704"/>
-        <location filename="mainwindow.cpp" line="725"/>
-        <location filename="mainwindow.cpp" line="767"/>
-        <location filename="mainwindow.cpp" line="784"/>
+        <location filename="mainwindow.cpp" line="745"/>
+        <location filename="mainwindow.cpp" line="766"/>
+        <location filename="mainwindow.cpp" line="808"/>
+        <location filename="mainwindow.cpp" line="825"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="704"/>
+        <location filename="mainwindow.cpp" line="745"/>
         <source>Invalid CoreDNS binary URL %1</source>
         <translation>无效的CoreDNS二进制文件URL %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="725"/>
+        <location filename="mainwindow.cpp" line="766"/>
         <source>Saving package to %1 failed.</source>
         <translation>保存包到%1失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="767"/>
+        <location filename="mainwindow.cpp" line="808"/>
         <source>Saving CoreDNS binary to %1 failed.</source>
         <translation>保存CoreDNS二进制文件到%1失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="784"/>
+        <location filename="mainwindow.cpp" line="825"/>
         <source>Updating CoreDNS binary failed.</source>
         <translation>更新CoreDNS二进制文件失败。</translation>
     </message>
@@ -645,12 +645,12 @@
         <translation type="vanished">保存CoreDNS二进制文件到%1失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="782"/>
+        <location filename="mainwindow.cpp" line="823"/>
         <source>Notice</source>
         <translation>提醒</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="782"/>
+        <location filename="mainwindow.cpp" line="823"/>
         <source>Updating CoreDNS binary finished.</source>
         <translation>更新CoreDNS二进制文件结束。</translation>
     </message>
@@ -678,14 +678,24 @@
         <translation>创建权限认证引用失败。</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="81"/>
+        <location filename="main.cpp" line="82"/>
+        <location filename="mainwindow.cpp" line="705"/>
         <source>Critical error</source>
         <translation>紧急错误</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="81"/>
+        <location filename="main.cpp" line="82"/>
+        <source>SSL not supported, some features may stop working.</source>
+        <translation>不支持SSL，有些功能将不能正确工作。</translation>
+    </message>
+    <message>
         <source>SSL not supported, exit now.</source>
-        <translation>不支持SSL，立即退出。</translation>
+        <translation type="vanished">不支持SSL，立即退出。</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="705"/>
+        <source>SSL not supported, cannot update CoreDNS binary.</source>
+        <translation>不支持SSL，无法更新CoreDNS二进制文件。</translation>
     </message>
 </context>
 </TS>
