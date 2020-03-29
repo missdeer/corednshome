@@ -40,8 +40,6 @@ private slots:
 
     void on_actionHomepage_triggered();
 
-    void on_actionDonate_triggered();
-
     void on_actionAbout_triggered();
 
     void on_actionStartCoreDNS_triggered();
@@ -89,6 +87,10 @@ private slots:
     void on_cbResolveGoogleDomainByChinaDNS_stateChanged(int state);
 
     void on_actionUpdateCoreDNSBinary_triggered();
+
+    void on_actionDonateViaPaypal_triggered();
+
+    void on_actionDonateViaAlipayWechat_triggered();
 
 private:
     Ui::MainWindow *ui;

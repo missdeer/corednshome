@@ -396,9 +396,19 @@
         <translation>127.0.0.1:6379，不需要则留空</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1246"/>
+        <location filename="mainwindow.ui" line="1221"/>
+        <source>&amp;Donate via Alipay/Wechat...</source>
+        <translation>通过支付宝或微信捐且...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1257"/>
         <source>Update CoreDNS binary</source>
         <translation>更新CoreDNS二进制文件</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1266"/>
+        <source>Donate via Paypal...</source>
+        <translation>通过Paypal捐助...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="148"/>
@@ -524,47 +534,46 @@
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1159"/>
+        <location filename="mainwindow.ui" line="1160"/>
         <source>&amp;Action</source>
         <translation>操作</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1173"/>
+        <location filename="mainwindow.ui" line="1174"/>
         <source>toolBar</source>
         <translation>工具栏</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1195"/>
+        <location filename="mainwindow.ui" line="1198"/>
         <source>Export Corefile...</source>
         <translation>导出Corefile...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1200"/>
+        <location filename="mainwindow.ui" line="1203"/>
         <source>Exit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1205"/>
+        <location filename="mainwindow.ui" line="1212"/>
         <source>&amp;Homepage...</source>
         <translation>主页...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1214"/>
         <source>&amp;Donate...</source>
-        <translation>捐赠...</translation>
+        <translation type="vanished">捐赠...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1223"/>
+        <location filename="mainwindow.ui" line="1230"/>
         <source>&amp;About...</source>
         <translation>关于...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1232"/>
+        <location filename="mainwindow.ui" line="1239"/>
         <source>Start CoreDNS</source>
         <translation>启动CoreDNS</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1241"/>
+        <location filename="mainwindow.ui" line="1248"/>
         <source>Stop CoreDNS</source>
         <translation>停止CoreDNS</translation>
     </message>
@@ -594,41 +603,41 @@
         <translation>导出配置到%1失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="231"/>
+        <location filename="mainwindow.cpp" line="225"/>
         <source>About CoreDNS Home</source>
         <oldsource>About CoreDNS GUI</oldsource>
         <translation>关于CoreDNS家用特供</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="232"/>
+        <location filename="mainwindow.cpp" line="226"/>
         <source>GUI configuration tool for &lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;custom build CoreDNS&lt;/a&gt;.&lt;br&gt;Homepage: &lt;a href=&quot;https://github.com/missdeer/corednshome&quot;&gt;https://github.com/missdeer/corednshome&lt;/a&gt;</source>
         <translation>用于&lt;a href=&quot;https://github.com/missdeer/coredns_custom_build&quot;&gt;自行编译的CoreDNS&lt;/a&gt;的图形用户界面的配置工具。&lt;br&gt;主页：&lt;a href=&quot;https://github.com/missdeer/corednshome&quot;&gt;https://github.com/missdeer/corednshome&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="745"/>
-        <location filename="mainwindow.cpp" line="766"/>
-        <location filename="mainwindow.cpp" line="808"/>
-        <location filename="mainwindow.cpp" line="825"/>
+        <location filename="mainwindow.cpp" line="739"/>
+        <location filename="mainwindow.cpp" line="760"/>
+        <location filename="mainwindow.cpp" line="802"/>
+        <location filename="mainwindow.cpp" line="819"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="745"/>
+        <location filename="mainwindow.cpp" line="739"/>
         <source>Invalid CoreDNS binary URL %1</source>
         <translation>无效的CoreDNS二进制文件URL %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="766"/>
+        <location filename="mainwindow.cpp" line="760"/>
         <source>Saving package to %1 failed.</source>
         <translation>保存包到%1失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="808"/>
+        <location filename="mainwindow.cpp" line="802"/>
         <source>Saving CoreDNS binary to %1 failed.</source>
         <translation>保存CoreDNS二进制文件到%1失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="825"/>
+        <location filename="mainwindow.cpp" line="819"/>
         <source>Updating CoreDNS binary failed.</source>
         <translation>更新CoreDNS二进制文件失败。</translation>
     </message>
@@ -645,12 +654,12 @@
         <translation type="vanished">保存CoreDNS二进制文件到%1失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="823"/>
+        <location filename="mainwindow.cpp" line="817"/>
         <source>Notice</source>
         <translation>提醒</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="823"/>
+        <location filename="mainwindow.cpp" line="817"/>
         <source>Updating CoreDNS binary finished.</source>
         <translation>更新CoreDNS二进制文件结束。</translation>
     </message>
@@ -679,7 +688,7 @@
     </message>
     <message>
         <location filename="main.cpp" line="82"/>
-        <location filename="mainwindow.cpp" line="705"/>
+        <location filename="mainwindow.cpp" line="699"/>
         <source>Critical error</source>
         <translation>紧急错误</translation>
     </message>
@@ -693,7 +702,7 @@
         <translation type="vanished">不支持SSL，立即退出。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="705"/>
+        <location filename="mainwindow.cpp" line="699"/>
         <source>SSL not supported, cannot update CoreDNS binary.</source>
         <translation>不支持SSL，无法更新CoreDNS二进制文件。</translation>
     </message>

@@ -11,5 +11,8 @@
         <file>res/bogus.txt</file>
         <file>res/china.txt</file>
         <file>res/google.txt</file>
+        <file>res/paypal.png</file>
+        <file>res/update.png</file>
+        <file>res/homepage.png</file>
     </qresource>
 </RCC>

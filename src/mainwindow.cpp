@@ -219,12 +219,6 @@ void MainWindow::on_actionHomepage_triggered()
     QDesktopServices::openUrl(QUrl("https://github.com/missdeer/corednshome"));
 }
 
-void MainWindow::on_actionDonate_triggered()
-{
-    DonateDialog dlg(this);
-    dlg.exec();
-}
-
 void MainWindow::on_actionAbout_triggered()
 {
     QMessageBox::about(this,
@@ -823,4 +817,15 @@ void MainWindow::onArtifactRequestFinished()
         QMessageBox::information(this, tr("Notice"), tr("Updating CoreDNS binary finished."), QMessageBox::Ok);
     else
         QMessageBox::warning(this, tr("Error"), tr("Updating CoreDNS binary failed."), QMessageBox::Ok);
+}
+
+void MainWindow::on_actionDonateViaPaypal_triggered()
+{
+    QDesktopServices::openUrl(QUrl("https://www.paypal.me/dfordsoft/"));
+}
+
+void MainWindow::on_actionDonateViaAlipayWechat_triggered()
+{
+    DonateDialog dlg(this);
+    dlg.exec();
 }

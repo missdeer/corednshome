@@ -1151,7 +1151,8 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionHomepage"/>
-    <addaction name="actionDonate"/>
+    <addaction name="actionDonateViaPaypal"/>
+    <addaction name="actionDonateViaAlipayWechat"/>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menu_Action_2">
@@ -1182,8 +1183,10 @@
    <addaction name="separator"/>
    <addaction name="actionStartCoreDNS"/>
    <addaction name="actionStopCoreDNS"/>
+   <addaction name="actionUpdateCoreDNSBinary"/>
    <addaction name="separator"/>
-   <addaction name="actionDonate"/>
+   <addaction name="actionDonateViaPaypal"/>
+   <addaction name="actionDonateViaAlipayWechat"/>
    <addaction name="actionAbout"/>
   </widget>
   <action name="actionExportCorefile">
@@ -1201,17 +1204,21 @@
    </property>
   </action>
   <action name="actionHomepage">
+   <property name="icon">
+    <iconset resource="corednshome.qrc">
+     <normaloff>:/res/homepage.png</normaloff>:/res/homepage.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Homepage...</string>
    </property>
   </action>
-  <action name="actionDonate">
+  <action name="actionDonateViaAlipayWechat">
    <property name="icon">
     <iconset resource="corednshome.qrc">
      <normaloff>:/res/donate.png</normaloff>:/res/donate.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Donate...</string>
+    <string>&amp;Donate via Alipay/Wechat...</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -1242,8 +1249,21 @@
    </property>
   </action>
   <action name="actionUpdateCoreDNSBinary">
+   <property name="icon">
+    <iconset resource="corednshome.qrc">
+     <normaloff>:/res/update.png</normaloff>:/res/update.png</iconset>
+   </property>
    <property name="text">
     <string>Update CoreDNS binary</string>
+   </property>
+  </action>
+  <action name="actionDonateViaPaypal">
+   <property name="icon">
+    <iconset resource="corednshome.qrc">
+     <normaloff>:/res/paypal.png</normaloff>:/res/paypal.png</iconset>
+   </property>
+   <property name="text">
+    <string>Donate via Paypal...</string>
    </property>
   </action>
  </widget>
