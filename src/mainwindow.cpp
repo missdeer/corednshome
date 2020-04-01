@@ -790,51 +790,26 @@ void MainWindow::on_actionUpdateCoreDNSBinary_triggered()
         return;
     }
     ui->actionUpdateCoreDNSBinary->setEnabled(false);
+    bool isBuild64Bit = QSysInfo::buildCpuArchitecture().contains(QLatin1String("64"));
 #if defined(Q_OS_WIN)
-#    if defined(_WIN64)
-    QUrl u("https://cdn.jsdelivr.net/gh/missdeer/corednshome@master/info/win64.txt");
-#    else
-    QUrl u("https://cdn.jsdelivr.net/gh/missdeer/corednshome@master/info/win32.txt");
-#    endif
+    QUrl u(isBuild64Bit ? "https://coredns.minidump.info/dl/coredns-windows-amd64.zip" : "https://coredns.minidump.info/dl/coredns-windows-386.zip");
 #elif defined(Q_OS_MAC)
-    QUrl u("https://cdn.jsdelivr.net/gh/missdeer/corednshome@master/info/macOS.txt");
+    QUrl u("https://coredns.minidump.info/dl/coredns-darwin-amd64.zip");
 #elif defined(Q_OS_LINUX)
-    QUrl u("https://cdn.jsdelivr.net/gh/missdeer/corednshome@master/info/linux.txt");
+    QUrl u(isBuild64Bit ? "https://coredns.minidump.info/dl/coredns-linux-amd64.zip" : "https://coredns.minidump.info/dl/coredns-linux-386.zip");
+#elif defined(Q_OS_FREEBSD)
+    QUrl u(isBuild64Bit ? "https://coredns.minidump.info/dl/coredns-freebsd-amd64.zip" : "https://coredns.minidump.info/dl/coredns-freebsd-386.zip");
+#elif defined(Q_OS_NETBSD)
+    QUrl u(isBuild64Bit ? "https://coredns.minidump.info/dl/coredns-netbsd-amd64.zip" : "https://coredns.minidump.info/dl/coredns-netbsd-386.zip");
+#elif defined(Q_OS_OPENBSD)
+    QUrl u(isBuild64Bit ? "https://coredns.minidump.info/dl/coredns-openbsd-amd64.zip" : "https://coredns.minidump.info/dl/coredns-openbsd-386.zip");
+#elif defined(Q_OS_SOLARIS)
+    QUrl u("https://coredns.minidump.info/dl/coredns-solaris-amd64.zip");
 #else
 #endif
 
     QNetworkRequest request(u);
-    request.setHeader(QNetworkRequest::UserAgentHeader,
-                      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
-                      "Gecko/20100101 Firefox/55.0");
-    request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
-
-    auto *reply       = m_nam.get(request);
-    auto *replyHelper = new NetworkReplyHelper(reply);
-    connect(replyHelper, SIGNAL(done()), this, SLOT(onInfoRequestFinished()));
-}
-
-void MainWindow::onInfoRequestFinished()
-{
-    auto *reply = qobject_cast<NetworkReplyHelper *>(sender());
-    Q_ASSERT(reply);
-    reply->deleteLater();
-
-    QByteArray &content = reply->content();
-
-    QUrl u = QUrl::fromUserInput(content);
-    if (!u.isValid())
-    {
-        QMessageBox::warning(this, tr("Error"), tr("Invalid CoreDNS binary URL %1").arg(u.toString()), QMessageBox::Ok);
-        ui->actionUpdateCoreDNSBinary->setEnabled(true);
-        return;
-    }
-
-    QNetworkRequest request(u);
-    request.setHeader(QNetworkRequest::UserAgentHeader,
-                      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
-                      "Gecko/20100101 Firefox/55.0");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "CoreDNSHome");
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
     request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
 
