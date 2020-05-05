@@ -75,7 +75,7 @@ jobs:
           
       - name: deploy-gcc
         env:
-          archiveName: CoreDNSHome-Win-gcc
+          archiveName: ${{ env.targetName }}-Win-gcc
         shell: pwsh
         run: |
           New-Item -ItemType Directory ${env:archiveName}
@@ -84,7 +84,7 @@ jobs:
           
       - name: deploy-clang
         env:
-          archiveName: CoreDNSHome-Win-clang
+          archiveName: ${{ env.targetName }}-Win-clang
         shell: pwsh
         run: |
           New-Item -ItemType Directory ${env:archiveName}
@@ -94,7 +94,7 @@ jobs:
       - name: upload artifact-gcc
         uses: actions/upload-artifact@v1
         env:
-          archiveName: CoreDNSHome-Win-gcc
+          archiveName: ${{ env.targetName }}-Win-gcc
         with:
           path: ${{ env.archiveName }}
           name: ${{ env.targetName }}-${{ matrix.mingw_prefix }}-gcc
@@ -102,7 +102,7 @@ jobs:
       - name: upload artifact-clang
         uses: actions/upload-artifact@v1
         env:
-          archiveName: CoreDNSHome-Win-clang
+          archiveName: ${{ env.targetName }}-Win-clang
         with:
           path: ${{ env.archiveName }}
           name: ${{ env.targetName }}-${{ matrix.mingw_prefix }}-clang
