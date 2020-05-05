@@ -50,8 +50,8 @@ jobs:
           path
           mkdir build
           cd build
-          qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..
-          mingw32-make -j 4
+          msys2do qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..
+          msys2do mingw32-make -j 4
           cd ..
 
       # tag ´ò°ü
