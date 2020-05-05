@@ -18,14 +18,12 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        qt_ver: [5.14.2]
-        qt_target: [desktop]
-        qt_arch: [win64_mingw73, win32_mingw73]
+        qt_arch: [mingw64_qt5, mingw32_qt5]
         include:
-          - qt_arch: win64_mingw73
+          - qt_arch: mingw64_qt5
             mingw_arch: MINGW64 
             mingw_prefix: mingw-w64-x86_64
-          - qt_arch: win32_mingw73
+          - qt_arch: mingw32_qt5
             mingw_arch: MINGW32
             mingw_prefix: mingw-w64-i686
     env:
@@ -37,28 +35,8 @@ jobs:
           update: true
           msystem: ${{ matrix.mingw_arch }}
           
-      - run: msys2do pacman --noconfirm -S ${{ matrix.mingw_prefix }}-gcc ${{ matrix.mingw_prefix }}-clang ${{ matrix.mingw_prefix }}-make
-          
-      - name: upgrade pip
-        shell: cmd
-        run: |
-          python.exe -m pip install --upgrade pip
-          
-      - name: Cache Qt
-        id: cache-qt
-        uses: actions/cache@v1
-        with:
-          path: ../Qt
-          key: ${{ runner.os }}-${{ matrix.qt_ver }}-QtCache
-          
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v2.0.0
-        with:
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
-          version: ${{ matrix.qt_ver }}
-          target: ${{ matrix.qt_target }}
-          arch: ${{ matrix.qt_arch }}
-          
+      - run: msys2do pacman --noconfirm -S ${{ matrix.mingw_prefix }}-gcc ${{ matrix.mingw_prefix }}-clang ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-qt5
+                              
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
