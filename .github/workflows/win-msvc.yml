@@ -1,4 +1,4 @@
-name: Windows
+name: Windows-msvc
 on: 
   push:
     paths-ignore:
@@ -84,11 +84,9 @@ jobs:
 
       - name: upload artifact
         uses: actions/upload-artifact@v1
-        env:
-          archiveName: CoreDNSHome-Win
         with:
           path: CoreDNSHome-Win
-          name: CoreDNSHome-Win-${{ matrix.msvc_arch }}
+          name: CoreDNSHome-msvc-${{ matrix.msvc_arch }}
 
       # tag 打包
       - name: package

@@ -1,4 +1,4 @@
-name: Windows
+name: Windows-mingw
 on: 
   push:
     paths-ignore:
@@ -67,10 +67,10 @@ jobs:
           # 创建文件夹
           New-Item -ItemType Directory ${env:archiveName}
           # 拷贝exe
-          Copy-Item build\src\Release\${env:targetName}'.exe' ${env:archiveName}\
-          Copy-Item build\src\Release\*.exe ${env:archiveName}\
-          Copy-Item build\src\Release\*.dll ${env:archiveName}\
-          Copy-Item build\src\Release\*.manifest ${env:archiveName}\
+          Copy-Item build\src\${env:targetName}'.exe' ${env:archiveName}\
+          Copy-Item build\src\*.exe ${env:archiveName}\
+          Copy-Item build\src\*.dll ${env:archiveName}\
+          Copy-Item build\src\*.manifest ${env:archiveName}\
           # 拷贝依赖
           windeployqt.exe --qmldir . ${env:archiveName}\${env:targetName}'.exe'
           lrelease src\corednshome_zh-CN.ts
@@ -82,7 +82,7 @@ jobs:
           archiveName: CoreDNSHome-Win
         with:
           path: CoreDNSHome-Win
-          name: CoreDNSHome-Win-${{ matrix.msvc_arch }}
+          name: CoreDNSHome-mingw-${{ matrix.msvc_arch }}
 
       # tag 打包
       - name: package
