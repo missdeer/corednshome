@@ -35,7 +35,7 @@ jobs:
           update: true
           msystem: ${{ matrix.mingw_arch }}
           
-      - run: msys2do pacman --noconfirm -S ${{ matrix.mingw_prefix }}-gcc ${{ matrix.mingw_prefix }}-clang ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-qt5
+      - run: msys2do pacman --noconfirm -S ${{ matrix.mingw_prefix }}-gcc ${{ matrix.mingw_prefix }}-clang ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-qt5 ${{ matrix.mingw_prefix }}-qt-creator
                               
       - uses: actions/checkout@v2
         with:
@@ -47,6 +47,7 @@ jobs:
         run: |
           $env:MSYSTEM = "${{ matrix.mingw_arch }}"
           $env:MSYS2_PATH_TYPE = "strict"
+          path
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..
