@@ -98,7 +98,7 @@ jobs:
         env:
           archiveName: CoreDNSHome-Win-gcc
         with:
-          path: ${env:archiveName}
+          path: ${{ env.archiveName }}
           name: ${{ env.targetName }}-${{ matrix.mingw_arch }}-gcc
 
       - name: upload artifact-clang
@@ -106,5 +106,5 @@ jobs:
         env:
           archiveName: CoreDNSHome-Win-clang
         with:
-          path: ${env:archiveName}
+          path: ${{ env.archiveName }}
           name: ${{ env.targetName }}-${{ matrix.mingw_arch }}-clang
