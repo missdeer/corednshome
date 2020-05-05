@@ -56,7 +56,7 @@ jobs:
         shell: cmd
         run: |
           cd build-gcc
-          msys2do mingw32-make.exe
+          msys2do mingw32-make.exe -j 4
           cd ..
           
       - name: qmake-clang
@@ -70,7 +70,7 @@ jobs:
         shell: cmd
         run: |
           cd build-clang
-          msys2do mingw32-make.exe
+          msys2do mingw32-make.exe -j 4
           cd ..
           
       - name: deploy-gcc
@@ -81,7 +81,6 @@ jobs:
           New-Item -ItemType Directory ${env:archiveName}
           Copy-Item build-gcc\src\release\${env:targetName}'.exe' ${env:archiveName}\
           msys2do windeployqt.exe ${env:archiveName}/${env:targetName}'.exe'
-          dir ${env:archiveName}
           
       - name: deploy-clang
         env:
@@ -91,7 +90,6 @@ jobs:
           New-Item -ItemType Directory ${env:archiveName}
           Copy-Item build-clang\src\release\${env:targetName}'.exe' ${env:archiveName}\
           msys2do windeployqt.exe ${env:archiveName}/${env:targetName}'.exe'
-          dir ${env:archiveName}
 
       - name: upload artifact-gcc
         uses: actions/upload-artifact@v1
@@ -99,7 +97,7 @@ jobs:
           archiveName: CoreDNSHome-Win-gcc
         with:
           path: ${{ env.archiveName }}
-          name: ${{ env.targetName }}-${{ matrix.mingw_arch }}-gcc
+          name: ${{ env.targetName }}-${{ matrix.mingw_prefix }}-gcc
 
       - name: upload artifact-clang
         uses: actions/upload-artifact@v1
@@ -107,4 +105,4 @@ jobs:
           archiveName: CoreDNSHome-Win-clang
         with:
           path: ${{ env.archiveName }}
-          name: ${{ env.targetName }}-${{ matrix.mingw_arch }}-clang
+          name: ${{ env.targetName }}-${{ matrix.mingw_prefix }}-clang
