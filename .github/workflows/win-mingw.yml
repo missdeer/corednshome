@@ -1,55 +1,102 @@
-name: MacOS
+name: Windows
 on: 
   push:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-      - '.github/workflows/win-mingw.yml'
+      - '.github/workflows/macos.yml'
       - '.github/workflows/win-msvc.yml'
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-      - '.github/workflows/win-mingw.yml'
+      - '.github/workflows/macos.yml'
       - '.github/workflows/win-msvc.yml'
 jobs:
   build:
     name: Build
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     strategy:
       matrix:
-        os: [macos-latest]
         qt_ver: [5.14.2]
-        qt_arch: [clang_64]
+        qt_target: [desktop]
+        qt_arch: [win64_mingw81, win32_mingw81]
+        include:
+          - qt_arch: win64_mingw81
+            msvc_arch: x64
+            qt_arch_install: mingw81
+          - qt_arch: win32_mingw81
+            msvc_arch: x86
+            qt_arch_install: mingw81
     env:
       targetName: corednshome
+      
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2.0.0
         with:
           version: ${{ matrix.qt_ver }}
-      
+          target: ${{ matrix.qt_target }}
+          arch: ${{ matrix.qt_arch }}
+      # À­È¡´úÂë
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
           submodules: true
           
-      - name: build macos
+      - name: build-mingw
+        shell: cmd
         run: |
           mkdir build
           cd build
-          qmake -r CONFIG+=release CONFIG+=qtquickcompiler ../${{ env.targetName }}.pro
-          make -j 2
+          qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
+          make -j 4
           cd ..
-      # tag æ‰“åŒ…
+
+      # tag ´ò°ü
+      - name: deploy
+        env:
+          archiveName: CoreDNSHome-Win
+        shell: pwsh
+        run: |
+          # ´´½¨ÎÄ¼ş¼Ğ
+          New-Item -ItemType Directory ${env:archiveName}
+          # ¿½±´exe
+          Copy-Item build\src\Release\${env:targetName}'.exe' ${env:archiveName}\
+          Copy-Item build\src\Release\*.exe ${env:archiveName}\
+          Copy-Item build\src\Release\*.dll ${env:archiveName}\
+          Copy-Item build\src\Release\*.manifest ${env:archiveName}\
+          # ¿½±´ÒÀÀµ
+          windeployqt.exe --qmldir . ${env:archiveName}\${env:targetName}'.exe'
+          lrelease src\corednshome_zh-CN.ts
+          Copy-Item src\corednshome_zh-CN.qm ${env:archiveName}\translations\
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v1
+        env:
+          archiveName: CoreDNSHome-Win
+        with:
+          path: CoreDNSHome-Win
+          name: CoreDNSHome-Win-${{ matrix.msvc_arch }}
+
+      # tag ´ò°ü
       - name: package
         if: startsWith(github.event.ref, 'refs/tags/')
+        env:
+          VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
+          archiveName: ${{ env.targetName }}-${{ matrix.qt_arch }}
+        shell: pwsh
         run: |
-          # æ‹·è´ä¾èµ–
-          macdeployqt "build/${targetName}.app" -qmldir=. -verbose=1 -dmg
-      # tag æŸ¥è¯¢github-Release
-      - name: queryRelease
-        id: queryReleaseMacos
+          # ´ò°üzip
+          Compress-Archive -Path CoreDNSHome-Win ${env:archiveName}'.zip'
+          # ¼ÇÂ¼»·¾³±äÁ¿packageName¸øºóĞøstep
+          $name = ${env:archiveName}
+          echo "::set-env name=packageName::$name"
+          # ´òÓ¡»·¾³±äÁ¿packageName
+          Write-Host 'packageName:'${env:packageName}
+      # tag ²éÑ¯github-Release
+      - name: queryReleaseWin
+        id: queryReleaseWin
         if: startsWith(github.event.ref, 'refs/tags/')
         shell: pwsh
         env:
@@ -64,20 +111,20 @@ jobs:
           } catch {
             Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
             Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription
-            # æ²¡æŸ¥åˆ°ï¼Œè¾“å‡º
+            # Ã»²éµ½£¬Êä³ö
             echo "::set-output name=needCreateRelease::true"  
             return
           }
           [string]$latestUpUrl = $response.upload_url
           Write-Host 'latestUpUrl:'$latestUpUrl
           if ($latestUpUrl.Length -eq 0) {
-            # æ²¡æŸ¥åˆ°ï¼Œè¾“å‡º
+            # Ã»²éµ½£¬Êä³ö
             echo "::set-output name=needCreateRelease::true"  
           }
-      # tag åˆ›å»ºgithub-Release
+      # tag ´´½¨github-Release
       - name: createReleaseWin
         id: createReleaseWin
-        if: startsWith(github.event.ref, 'refs/tags/') && steps.queryReleaseMacos.outputs.needCreateRelease == 'true'
+        if: startsWith(github.event.ref, 'refs/tags/') && steps.queryReleaseWin.outputs.needCreateRelease == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: actions/create-release@v1.0.0
@@ -87,17 +134,17 @@ jobs:
           body: ${{ github.event.head_commit.message }}
           draft: false
           prerelease: false
-      # é‡å®šå‘upload_urlåˆ°ç¯å¢ƒå˜é‡uploadUrlã€‚
+      # ÖØ¶¨Ïòupload_urlµ½»·¾³±äÁ¿uploadUrl¡£
       - name: getLatestTagRelease
-        # tag ä¸Šä¸€æ­¥æ— è®ºæˆåŠŸè¿˜æ˜¯å¤±è´¥éƒ½æ‰§è¡Œ
+        # tag ÉÏÒ»²½ÎŞÂÛ³É¹¦»¹ÊÇÊ§°Ü¶¼Ö´ĞĞ
         if: startsWith(github.event.ref, 'refs/tags/')
         shell: pwsh
         env:
           githubFullName: ${{ github.event.repository.full_name }}
-          upUrl: ${{ steps.queryReleaseMacos.outputs.upload_url }}
+          upUrl: ${{ steps.createReleaseWin.outputs.upload_url }}
           ref: ${{ github.event.ref }}
         run: |
-          # upUrlä¸ä¸ºç©ºï¼Œå¯¼å‡ºå°±å®Œäº‹
+          # upUrl²»Îª¿Õ£¬µ¼³ö¾ÍÍêÊÂ
           if (${env:upUrl}.Length -gt 0) {
               $v=${env:upUrl}
               echo "::set-env name=uploadUrl::$v"
@@ -110,15 +157,15 @@ jobs:
           Write-Host 'latestUpUrl:'$latestUpUrl
           echo "::set-env name=uploadUrl::$latestUpUrl"
           Write-Host 'env uploadUrl:'${env:uploadUrl}
-      # tag ä¸Šä¼ Release
+      # tag ÉÏ´«Release
       - name: uploadRelease
         id: uploadRelease
         if: startsWith(github.event.ref, 'refs/tags/')
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         uses: actions/upload-release-asset@v1.0.1
         with:
           upload_url: ${{ env.uploadUrl }}
-          asset_path: ./build/${{ env.targetName }}.dmg
-          asset_name: ${{ env.targetName }}.dmg
-          asset_content_type: application/applefile
+          asset_path: ./${{ env.packageName }}.zip
+          asset_name: ${{ env.packageName }}.zip
+          asset_content_type: application/zip
