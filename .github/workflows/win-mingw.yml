@@ -45,13 +45,15 @@ jobs:
       - name: build-mingw
         shell: cmd
         run: |
-          $env:MSYSTEM = "${{ matrix.mingw_arch }}"
-          $env:MSYS2_PATH_TYPE = "strict"
-          path
           mkdir build
           cd build
-          msys2do qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..
-          msys2do mingw32-make -j 4
+          msys2do qmake.exe -v
+          msys2do qmake.exe -r -spec win32-g++ CONFIG+=release CONFIG+=qtquickcompiler ..
+          dir
+          dir ..
+          msys2do mingw32-make.exe
+          dir
+          dir ..
           cd ..
 
       # tag ´ò°ü
