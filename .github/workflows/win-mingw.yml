@@ -80,7 +80,7 @@ jobs:
         run: |
           New-Item -ItemType Directory ${env:archiveName}
           Copy-Item build-gcc\src\release\${env:targetName}'.exe' ${env:archiveName}\
-          msys2do windeployqt.exe ${env:archiveName}\${env:targetName}'.exe'
+          msys2do windeployqt.exe ${env:archiveName}/${env:targetName}'.exe'
           dir ${env:archiveName}
           
       - name: deploy-clang
@@ -90,7 +90,7 @@ jobs:
         run: |
           New-Item -ItemType Directory ${env:archiveName}
           Copy-Item build-clang\src\release\${env:targetName}'.exe' ${env:archiveName}\
-          msys2do windeployqt.exe ${env:archiveName}\${env:targetName}'.exe'
+          msys2do windeployqt.exe ${env:archiveName}/${env:targetName}'.exe'
           dir ${env:archiveName}
 
       - name: upload artifact-gcc
