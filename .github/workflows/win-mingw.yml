@@ -47,11 +47,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          msys2do qmake.exe -v
-          msys2do qmake.exe -r -spec win32-g++ CONFIG+=release CONFIG+=qtquickcompiler ..
-          dir
-          dir ..
-          msys2do mingw32-make.exe
+          msys2do "qmake.exe -r -spec win32-g++ CONFIG+=release CONFIG+=qtquickcompiler .. && mingw32-make.exe"
           dir
           dir ..
           cd ..
