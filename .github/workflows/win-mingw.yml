@@ -64,14 +64,16 @@ jobs:
           archiveName: CoreDNSHome-Win
         shell: pwsh
         run: |
-          # ´´½¨ÎÄ¼þ¼Ð
+          dir
           New-Item -ItemType Directory ${env:archiveName}
-          # ¿½±´exe
+          dir
+          dir build
+          dir build\src
           Copy-Item build\src\${env:targetName}'.exe' ${env:archiveName}\
           Copy-Item build\src\*.exe ${env:archiveName}\
           Copy-Item build\src\*.dll ${env:archiveName}\
           Copy-Item build\src\*.manifest ${env:archiveName}\
-          # ¿½±´ÒÀÀµ
+          dir ${env:archiveName}
           windeployqt.exe --qmldir . ${env:archiveName}\${env:targetName}'.exe'
           lrelease src\corednshome_zh-CN.ts
           Copy-Item src\corednshome_zh-CN.qm ${env:archiveName}\translations\
