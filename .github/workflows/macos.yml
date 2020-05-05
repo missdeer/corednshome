@@ -24,7 +24,7 @@ jobs:
     env:
       targetName: corednshome
     steps:
-     - name: Cache Qt
+      - name: Cache Qt
         id: cache-qt
         uses: actions/cache@v1
         with:
