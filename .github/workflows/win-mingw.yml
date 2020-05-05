@@ -18,14 +18,28 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        qt_arch: [mingw64_qt5, mingw32_qt5]
+        qt_arch: [mingw64_qt5-gcc, mingw32_qt5-gcc, mingw64_qt5-clang, mingw32_qt5-clang]
         include:
-          - qt_arch: mingw64_qt5
+          - qt_arch: mingw64_qt5-gcc
             mingw_arch: MINGW64 
             mingw_prefix: mingw-w64-x86_64
-          - qt_arch: mingw32_qt5
+            toolchains: gcc
+            mkspec: win32-g++
+          - qt_arch: mingw32_qt5-gcc
             mingw_arch: MINGW32
             mingw_prefix: mingw-w64-i686
+            toolchains: gcc
+            mkspec: win32-g++
+          - qt_arch: mingw64_qt5-clang
+            mingw_arch: MINGW64 
+            mingw_prefix: mingw-w64-x86_64
+            toolchains: clang
+            mkspec: win32-clang-g++
+          - qt_arch: mingw32_qt5-clang
+            mingw_arch: MINGW32
+            mingw_prefix: mingw-w64-i686
+            toolchains: clang
+            mkspec: win32-clang-g++
     env:
       targetName: corednshome
       
@@ -35,74 +49,42 @@ jobs:
           update: true
           msystem: ${{ matrix.mingw_arch }}
           
-      - run: msys2do pacman --noconfirm -S ${{ matrix.mingw_prefix }}-gcc ${{ matrix.mingw_prefix }}-clang ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-qt5 
+      - run: msys2do pacman --noconfirm -S ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-qt5 
                               
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
           submodules: true
       
-      - run: mkdir build-gcc
-      - run: mkdir build-clang
+      - run: mkdir build
           
-      - name: qmake-gcc
+      - name: qmake
         shell: cmd
         run: |
-          cd build-gcc
-          msys2do qmake.exe -r -spec win32-g++ CONFIG+=release CONFIG+=qtquickcompiler ..
+          cd build
+          msys2do qmake.exe -r -spec ${{ matrix.mkspec }} CONFIG+=release CONFIG+=qtquickcompiler ..
           cd ..
 
-      - name: mingw32-make-gcc
+      - name: mingw32-make
         shell: cmd
         run: |
-          cd build-gcc
+          cd build
           msys2do mingw32-make.exe -j 4
           cd ..
-          
-      - name: qmake-clang
-        shell: cmd
-        run: |
-          cd build-clang
-          msys2do qmake.exe -r -spec win32-clang-g++ CONFIG+=release CONFIG+=qtquickcompiler ..
-          cd ..
-
-      - name: mingw32-make-clang
-        shell: cmd
-        run: |
-          cd build-clang
-          msys2do mingw32-make.exe -j 4
-          cd ..
-          
-      - name: deploy-gcc
+                    
+      - name: deploy
         env:
-          archiveName: ${{ env.targetName }}-Win-gcc
+          archiveName: ${{ env.targetName }}-${{ matrix.toolchains }}
         shell: pwsh
         run: |
           New-Item -ItemType Directory ${env:archiveName}
-          Copy-Item build-gcc\src\release\${env:targetName}'.exe' ${env:archiveName}\
+          Copy-Item build\src\release\${env:targetName}'.exe' ${env:archiveName}\
           msys2do windeployqt.exe ${env:archiveName}/${env:targetName}'.exe'
           
-      - name: deploy-clang
-        env:
-          archiveName: ${{ env.targetName }}-Win-clang
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory ${env:archiveName}
-          Copy-Item build-clang\src\release\${env:targetName}'.exe' ${env:archiveName}\
-          msys2do windeployqt.exe ${env:archiveName}/${env:targetName}'.exe'
-
-      - name: upload artifact-gcc
+      - name: upload artifact
         uses: actions/upload-artifact@v1
         env:
-          archiveName: ${{ env.targetName }}-Win-gcc
+          archiveName: ${{ env.targetName }}-${{ matrix.toolchains }}
         with:
           path: ${{ env.archiveName }}
-          name: ${{ env.targetName }}-${{ matrix.mingw_prefix }}-gcc
-
-      - name: upload artifact-clang
-        uses: actions/upload-artifact@v1
-        env:
-          archiveName: ${{ env.targetName }}-Win-clang
-        with:
-          path: ${{ env.archiveName }}
-          name: ${{ env.targetName }}-${{ matrix.mingw_prefix }}-clang
+          name: ${{ env.targetName }}-${{ matrix.mingw_prefix }}-${{ matrix.toolchains }}
