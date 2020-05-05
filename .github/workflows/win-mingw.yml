@@ -48,19 +48,13 @@ jobs:
           mkdir build
           cd build
           msys2do qmake.exe -r -spec win32-g++ CONFIG+=release CONFIG+=qtquickcompiler ..
-          dir
-          dir ..
           cd ..
 
       - name: mingw32-make
         shell: cmd
         run: |
           cd build
-          dir
-          dir ..
           msys2do mingw32-make.exe
-          dir
-          dir ..
           cd ..
           
       - name: deploy
@@ -68,26 +62,19 @@ jobs:
           archiveName: CoreDNSHome-Win
         shell: pwsh
         run: |
-          dir
           New-Item -ItemType Directory ${env:archiveName}
-          dir
-          dir build
-          dir build\src
-          dir build\src\release
-          Copy-Item build\src\release\*.exe ${env:archiveName}\
-          Copy-Item build\src\release\*.dll ${env:archiveName}\
-          Copy-Item build\src\release\*.manifest ${env:archiveName}\
-          dir ${env:archiveName}
+          Copy-Item build\src\release\${env:targetName}'.exe' ${env:archiveName}\
           windeployqt.exe --qmldir . ${env:archiveName}\${env:targetName}'.exe'
           lrelease src\corednshome_zh-CN.ts
           Copy-Item src\corednshome_zh-CN.qm ${env:archiveName}\translations\
+          dir ${env:archiveName}
 
       - name: upload artifact
         uses: actions/upload-artifact@v1
         env:
           archiveName: CoreDNSHome-Win
         with:
-          path: CoreDNSHome-Win
+          path: ${env:archiveName}
           name: CoreDNSHome-${{ matrix.mingw_arch }}
 
       # tag ´ò°ü
