@@ -42,17 +42,27 @@ jobs:
           fetch-depth: 1
           submodules: true
           
-      - name: build-mingw
+      - name: qmake
         shell: cmd
         run: |
           mkdir build
           cd build
-          msys2do "qmake.exe -r -spec win32-g++ CONFIG+=release CONFIG+=qtquickcompiler .. && mingw32-make.exe"
+          msys2do qmake.exe -r -spec win32-g++ CONFIG+=release CONFIG+=qtquickcompiler ..
           dir
           dir ..
           cd ..
 
-      # tag ´ò°ü
+      - name: mingw32-make
+        shell: cmd
+        run: |
+          cd build
+          dir
+          dir ..
+          msys2do mingw32-make.exe
+          dir
+          dir ..
+          cd ..
+          
       - name: deploy
         env:
           archiveName: CoreDNSHome-Win
