@@ -99,7 +99,7 @@ jobs:
           archiveName: CoreDNSHome-Win-gcc
         with:
           path: ${env:archiveName}
-          name: ${env:targetName}-${{ matrix.mingw_arch }}-gcc
+          name: ${{ env.targetName }}-${{ matrix.mingw_arch }}-gcc
 
       - name: upload artifact-clang
         uses: actions/upload-artifact@v1
@@ -107,4 +107,4 @@ jobs:
           archiveName: CoreDNSHome-Win-clang
         with:
           path: ${env:archiveName}
-          name: ${env:targetName}-${{ matrix.mingw_arch }}-clang
+          name: ${{ env.targetName }}-${{ matrix.mingw_arch }}-clang
