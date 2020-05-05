@@ -38,13 +38,21 @@ jobs:
         run: |
           python.exe -m pip install --upgrade pip
           
+     - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: ${{ runner.os }}-QtCache
+          
       - name: Install Qt
         uses: jurplel/install-qt-action@v2.0.0
         with:
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
           version: ${{ matrix.qt_ver }}
           target: ${{ matrix.qt_target }}
           arch: ${{ matrix.qt_arch }}
-      # 拉取代码
+          
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
