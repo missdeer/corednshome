@@ -20,18 +20,23 @@ jobs:
       matrix:
         qt_ver: [5.14.2]
         qt_target: [desktop]
-        qt_arch: [win64_mingw81, win32_mingw81]
+        qt_arch: [win64_mingw73, win32_mingw73]
         include:
-          - qt_arch: win64_mingw81
+          - qt_arch: win64_mingw73
             msvc_arch: x64
-            qt_arch_install: mingw81
-          - qt_arch: win32_mingw81
+            qt_arch_install: mingw73
+          - qt_arch: win32_mingw73
             msvc_arch: x86
-            qt_arch_install: mingw81
+            qt_arch_install: mingw73
     env:
       targetName: corednshome
       
     steps:
+      - name: upgrade pip
+        shell: cmd
+        run: |
+          python.exe -m pip install --upgrade pip
+          
       - name: Install Qt
         uses: jurplel/install-qt-action@v2.0.0
         with:
