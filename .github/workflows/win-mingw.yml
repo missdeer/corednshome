@@ -24,55 +24,24 @@ jobs:
         include:
           - qt_arch: win64_mingw73
             msvc_arch: x64
-            arch: 64
+            mingw_arch: MINGW64 
+            mingw_prefix: mingw-w64-i686
             qt_arch_install: mingw73
           - qt_arch: win32_mingw73
             msvc_arch: x86
-            arch: 32
+            mingw_arch: MINGW32
+            mingw_prefix: mingw-w64-x86_64
             qt_arch_install: mingw73
     env:
       targetName: corednshome
       
     steps:
-      - name: Cache msys2
-        id: cache-msys2
-        uses: actions/cache@v1
+      - uses: numworks/setup-msys2@v1
         with:
-          path: msys${{ matrix.arch }}
-          key: msys2-x${{ matrix.arch }}
-      - name: Install msys2
-        if: steps.cache-msys2.outputs.cache-hit != 'true'
-        run: |
-          if ( "${{ matrix.arch }}" -eq "32" ) {
-            (New-Object net.webclient).DownloadFile("http://repo.msys2.org/distrib/i686/msys2-base-i686-20190524.tar.xz","msys2.tar.xz")
-          } else {
-            (New-Object net.webclient).DownloadFile("http://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20190524.tar.xz","msys2.tar.xz")
-          }
-          tar xf msys2.tar.xz -C $env:GITHUB_WORKSPACE.Replace("\", "/")
-      - run: |
-          $env:MSYSTEM = "MINGW${{ matrix.arch }}"
-          $env:MSYS2_PATH_TYPE = "strict"
-          $script = @'
-            uname -m
-            uname -a
-            echo $PATH
-          '@
-          & "$env:GITHUB_WORKSPACE\msys${{ matrix.arch }}\usr\bin\bash" -c -l $script
-      - name: Pacman
-        run: |
-          $env:MSYSTEM = "MINGW${{ matrix.arch }}"
-          $env:MSYS2_PATH_TYPE = "strict"
-          $script = @'
-            # pacman --noconfirm -Syu
-            pacman --noconfirm -S msys/gcc
-            if [ "$MSYSTEM" = "MINGW32" ]; then
-              pacman --noconfirm -S mingw32/mingw-w64-i686-gcc mingw32/mingw-w64-i686-clang
-            else
-              pacman --noconfirm -S mingw64/mingw-w64-x86_64-gcc mingw64/mingw-w64-x86_64-clang
-            fi
-            pacman --noconfirm -S make
-          '@
-          & "$env:GITHUB_WORKSPACE\msys${{ matrix.arch }}\usr\bin\bash" -c -l $script
+          update: true
+          msystem: ${{ matrix.mingw_arch }}
+          
+      - run: msys2do pacman --noconfirm -S ${{ matrix.mingw_prefix }}-gcc ${{ matrix.mingw_prefix }}-clang ${{ matrix.mingw_prefix }}-make
           
       - name: upgrade pip
         shell: cmd
@@ -102,12 +71,12 @@ jobs:
       - name: build-mingw
         shell: cmd
         run: |
-          $env:MSYSTEM = "MINGW${{ matrix.arch }}"
+          $env:MSYSTEM = "${{ matrix.mingw_arch }}"
           $env:MSYS2_PATH_TYPE = "strict"
           mkdir build
           cd build
-          qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
-          make -j 4
+          qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..
+          mingw32-make -j 4
           cd ..
 
       # tag ´ò°ü
