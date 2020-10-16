@@ -72,33 +72,31 @@ jobs:
       targetName: corednshome
 
     steps:
-      - uses: numworks/setup-msys2@v1
+      - uses: msys2/setup-msys2@v2
         with:
           update: true
           msystem: ${{ matrix.mingw_arch }}
-
-      - run: msys2do pacman --noconfirm -S ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-${{ matrix.qt_build }} ${{ matrix.mingw_prefix }}-openssl ${{ matrix.mingw_prefix }}-zstd
+          install:  ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-${{ matrix.qt_build }} ${{ matrix.mingw_prefix }}-openssl ${{ matrix.mingw_prefix }}-zstd
 
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
           submodules: true
 
-      - run: mkdir build
-      - run: msys2do bash updatelist.sh
-
       - name: qmake
-        shell: cmd
+        shell: msys2 {0}
         run: |
+          bash updatelist.sh
+          mkdir build
           cd build
-          msys2do ${{ matrix.qmake }} -r -spec ${{ matrix.mkspec }} CONFIG+=release CONFIG+=qtquickcompiler ..
+          ${{ matrix.qmake }} -r -spec ${{ matrix.mkspec }} CONFIG+=release CONFIG+=qtquickcompiler ..
           cd ..
 
       - name: mingw32-make
-        shell: cmd
+        shell: msys2 {0}
         run: |
           cd build
-          msys2do mingw32-make.exe -j 4
+          mingw32-make.exe -j 4
           cd ..
 
       - name: deploy
@@ -108,7 +106,14 @@ jobs:
         run: |
           New-Item -ItemType Directory ${env:archiveName}
           Copy-Item build\src\release\${env:targetName}'.exe' ${env:archiveName}\
-          msys2do ${{ matrix.windeployqt }} ${env:archiveName}/${env:targetName}'.exe'
+
+
+      - name: deploy qt
+        shell: msys2 {0}
+        env:
+          archiveName: ${{ env.targetName }}-${{ matrix.toolchains }}
+        run: |
+          ${{ matrix.windeployqt }} ${env:archiveName}/${env:targetName}'.exe'
 
       - name: upload artifact
         uses: actions/upload-artifact@v1
