@@ -107,14 +107,6 @@ jobs:
           New-Item -ItemType Directory ${env:archiveName}
           Copy-Item build\src\release\${env:targetName}'.exe' ${env:archiveName}\
 
-
-      - name: deploy qt
-        shell: msys2 {0}
-        env:
-          archiveName: ${{ env.targetName }}-${{ matrix.toolchains }}
-        run: |
-          ${{ matrix.windeployqt }} ${env:archiveName}/${env:targetName}'.exe'
-
       - name: upload artifact
         uses: actions/upload-artifact@v1
         env:
