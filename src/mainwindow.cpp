@@ -453,7 +453,7 @@ void MainWindow::updateChinaDomainList()
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
+    request.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
 
     auto *reply       = m_nam.get(request);
     auto *replyHelper = new NetworkReplyHelper(reply);
@@ -473,7 +473,7 @@ void MainWindow::updateAppleDomainList()
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
+    request.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
 
     auto *reply       = m_nam.get(request);
     auto *replyHelper = new NetworkReplyHelper(reply);
@@ -492,7 +492,7 @@ void MainWindow::updateGoogleDomainList()
                       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) "
                       "Gecko/20100101 Firefox/55.0");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
+    request.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
 
     auto *reply       = m_nam.get(request);
     auto *replyHelper = new NetworkReplyHelper(reply);
@@ -515,7 +515,7 @@ void MainWindow::updateBogusList()
     request.setRawHeader("Accept", "application/json, text/javascript, */*; q=0.01");
     request.setRawHeader("Accept-Encoding", "gzip, deflate");
     request.setRawHeader("X-Requested-With", "XMLHttpRequest");
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
+    request.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
 
     auto *reply       = m_nam.get(request);
     auto *replyHelper = new NetworkReplyHelper(reply);
@@ -794,6 +794,7 @@ void MainWindow::on_actionUpdateCoreDNSBinary_triggered()
 #if defined(Q_OS_WIN)
     QUrl u(isBuild64Bit ? "https://coredns.minidump.info/dl/coredns-windows-amd64.zip" : "https://coredns.minidump.info/dl/coredns-windows-386.zip");
 #elif defined(Q_OS_MAC)
+    Q_UNUSED(isBuild64Bit);
     QUrl u("https://coredns.minidump.info/dl/coredns-darwin-amd64.zip");
 #elif defined(Q_OS_LINUX)
     QUrl u(isBuild64Bit ? "https://coredns.minidump.info/dl/coredns-linux-amd64.zip" : "https://coredns.minidump.info/dl/coredns-linux-386.zip");
@@ -811,7 +812,7 @@ void MainWindow::on_actionUpdateCoreDNSBinary_triggered()
     QNetworkRequest request(u);
     request.setHeader(QNetworkRequest::UserAgentHeader, "CoreDNSHome");
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-    request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
+    request.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
 
     // save as coredns.7z then uncompress it
     QString path = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
