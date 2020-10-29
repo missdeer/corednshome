@@ -46,6 +46,7 @@ jobs:
           
       - name: build macos
         run: |
+          brew install zlib
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ../${{ env.targetName }}.pro
