@@ -18,7 +18,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        qt_ver: [5.15.0]
+        qt_ver: [5.15.1]
         qt_target: [desktop]
         qt_arch: [win64_msvc2019_64, win32_msvc2019]
         # 额外设置msvc_arch
@@ -33,11 +33,6 @@ jobs:
       targetName: corednshome
       
     steps:
-      - name: upgrade pip
-        shell: cmd
-        run: |
-          python.exe -m pip install --upgrade pip
-          
       - name: Cache Qt
         id: cache-qt
         uses: actions/cache@v1
@@ -46,7 +41,7 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.qt_ver }}-QtCache
           
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2.7.1
+        uses: jurplel/install-qt-action@v2
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
           version: ${{ matrix.qt_ver }}
