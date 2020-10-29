@@ -3,10 +3,10 @@
 <assemblyIdentity
     version="9.0.0.0"
     processorArchitecture="x86"
-    name="coredns.exe"
+    name="corednshome.exe"
     type="win32"
 />
-<description>RegisterProtocolHandler</description>
+<description>CoreDNSHome</description>
 <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
     <security>
         <requestedPrivileges>
