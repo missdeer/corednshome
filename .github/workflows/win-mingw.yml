@@ -96,7 +96,7 @@ jobs:
         shell: msys2 {0}
         run: |
           cd build
-          mingw32-make.exe -j 4
+          mingw32-make.exe -j `nproc`
           cd ..
 
       - name: deploy
