@@ -18,7 +18,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        qt_ver: [5.15.1]
+        qt_ver: [5.15.2]
         qt_target: [desktop]
         qt_arch: [win64_msvc2019_64, win32_msvc2019]
         # 额外设置msvc_arch
