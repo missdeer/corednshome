@@ -92,7 +92,7 @@ jobs:
         with:
           update: true
           msystem: ${{ matrix.mingw_arch }}
-          install:  ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-${{ matrix.qt_build }} ${{ matrix.mingw_prefix }}-openssl ${{ matrix.mingw_prefix }}-zstd
+          install:  ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-${{ matrix.qt_build }} ${{ matrix.mingw_prefix }}-openssl ${{ matrix.mingw_prefix }}-zstd ${{ matrix.mingw_prefix }}-cmake
 
       - uses: actions/checkout@v2
         with:
@@ -115,13 +115,29 @@ jobs:
           mingw32-make.exe -j `nproc`
           cd ..
 
+      - run: |
+          git clone https://github.com/missdeer/mingwdeployqt.git
+          
+      - name: Build mingwdeployqt
+        shell: msys2 {0}
+        run: |
+          cd mingwdeployqt
+          mkdir build
+          cd build
+          env PATH=$PATH:/${{ matrix.mingw_arch }}/bin cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{ matrix.c }} -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} -G Ninja ..
+          ninja
+          cp mingwdeployqt.exe /${{ matrix.mingw_arch }}/bin/
+          cd ../..
+          
       - name: deploy
+        shell: msys2 {0}
         env:
           archiveName: ${{ env.targetName }}-${{ matrix.toolchains }}
         shell: pwsh
         run: |
-          New-Item -ItemType Directory ${env:archiveName}
-          Copy-Item build\src\release\${env:targetName}'.exe' ${env:archiveName}\
+          mkdir '${{ env.archiveName }}'
+          cp build/src/release/${{ env.targetName }}'.exe' ${{ env.archiveName }}/
+          env PATH=$PATH:/${{ matrix.mingw_arch }}/bin /${{ matrix.mingw_arch }}/bin/mingwdeployqt.exe ${{ env.archiveName }}/${{ env.targetName }}'.exe'
 
       - name: upload artifact
         uses: actions/upload-artifact@v1
