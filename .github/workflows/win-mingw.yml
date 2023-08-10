@@ -18,11 +18,19 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        qt_arch: [mingw64_qt5-gcc, mingw32_qt5-gcc, mingw64_qt5-static-gcc, mingw32_qt5-static-gcc, mingw64_qt5-clang, mingw32_qt5-clang]
+        qt_arch: [mingw64_qt5-gcc, ucrt64_qt5-gcc, mingw32_qt5-gcc, mingw64_qt5-static-gcc, ucrt64_qt5-static-gcc, mingw32_qt5-static-gcc, mingw64_qt5-clang, mingw32_qt5-clang]
         include:
           - qt_arch: mingw64_qt5-gcc
             mingw_arch: MINGW64 
             mingw_prefix: mingw-w64-x86_64
+            toolchains: gcc
+            mkspec: win32-g++
+            qt_build: qt5
+            qmake: qmake.exe
+            windeployqt: windeployqt.exe
+          - qt_arch: ucrt64_qt5-gcc
+            mingw_arch: UCRT64 
+            mingw_prefix: mingw-w64-ucrt-x86_64
             toolchains: gcc
             mkspec: win32-g++
             qt_build: qt5
@@ -44,6 +52,14 @@ jobs:
             qt_build: qt5-static
             qmake: /mingw64/qt5-static/bin/qmake.exe
             windeployqt: ls.exe
+          - qt_arch: ucrt64_qt5-static-gcc
+            mingw_arch: UCRT64 
+            mingw_prefix: mingw-w64-ucrt-x86_64
+            toolchains: gcc
+            mkspec: win32-g++
+            qt_build: qt5-static
+            qmake: /ucrt64/qt5-static/bin/qmake.exe
+            windeployqt: ls.exe
           - qt_arch: mingw32_qt5-static-gcc
             mingw_arch: MINGW32
             mingw_prefix: mingw-w64-i686
@@ -53,16 +69,16 @@ jobs:
             qmake: /mingw32/qt5-static/bin/qmake.exe
             windeployqt: ls.exe
           - qt_arch: mingw64_qt5-clang
-            mingw_arch: MINGW64 
-            mingw_prefix: mingw-w64-x86_64
+            mingw_arch: CLANG64 
+            mingw_prefix: mingw-w64-clang-x86_64
             toolchains: clang
             mkspec: win32-clang-g++
             qt_build: qt5
             qmake: qmake.exe
             windeployqt: windeployqt.exe
           - qt_arch: mingw32_qt5-clang
-            mingw_arch: MINGW32
-            mingw_prefix: mingw-w64-i686
+            mingw_arch: CLANG32
+            mingw_prefix: mingw-w64-clang-i686
             toolchains: clang
             mkspec: win32-clang-g++
             qt_build: qt5
