@@ -28,6 +28,8 @@ jobs:
             qt_build: qt5
             qmake: qmake.exe
             windeployqt: windeployqt.exe
+            c: gcc
+            cxx: g++
           - qt_arch: ucrt64_qt5-gcc
             mingw_arch: UCRT64 
             mingw_prefix: mingw-w64-ucrt-x86_64
@@ -36,6 +38,8 @@ jobs:
             qt_build: qt5
             qmake: qmake.exe
             windeployqt: windeployqt.exe
+            c: gcc
+            cxx: g++
           - qt_arch: mingw32_qt5-gcc
             mingw_arch: MINGW32
             mingw_prefix: mingw-w64-i686
@@ -44,6 +48,8 @@ jobs:
             qt_build: qt5
             qmake: qmake.exe
             windeployqt: windeployqt.exe
+            c: gcc
+            cxx: g++
           - qt_arch: mingw64_qt5-static-gcc
             mingw_arch: MINGW64 
             mingw_prefix: mingw-w64-x86_64
@@ -52,6 +58,8 @@ jobs:
             qt_build: qt5-static
             qmake: /mingw64/qt5-static/bin/qmake.exe
             windeployqt: ls.exe
+            c: gcc
+            cxx: g++
           - qt_arch: ucrt64_qt5-static-gcc
             mingw_arch: UCRT64 
             mingw_prefix: mingw-w64-ucrt-x86_64
@@ -60,6 +68,8 @@ jobs:
             qt_build: qt5-static
             qmake: /ucrt64/qt5-static/bin/qmake.exe
             windeployqt: ls.exe
+            c: gcc
+            cxx: g++
           - qt_arch: mingw32_qt5-static-gcc
             mingw_arch: MINGW32
             mingw_prefix: mingw-w64-i686
@@ -68,6 +78,8 @@ jobs:
             qt_build: qt5-static
             qmake: /mingw32/qt5-static/bin/qmake.exe
             windeployqt: ls.exe
+            c: gcc
+            cxx: g++
           - qt_arch: mingw64_qt5-clang
             mingw_arch: CLANG64 
             mingw_prefix: mingw-w64-clang-x86_64
@@ -76,6 +88,8 @@ jobs:
             qt_build: qt5
             qmake: qmake.exe
             windeployqt: windeployqt.exe
+            c: clang
+            cxx: clang++
           - qt_arch: mingw32_qt5-clang
             mingw_arch: CLANG32
             mingw_prefix: mingw-w64-clang-i686
@@ -84,6 +98,8 @@ jobs:
             qt_build: qt5
             qmake: qmake.exe
             windeployqt: windeployqt.exe
+            c: clang
+            cxx: clang++
     env:
       targetName: corednshome
 
