@@ -133,7 +133,6 @@ jobs:
         shell: msys2 {0}
         env:
           archiveName: ${{ env.targetName }}-${{ matrix.toolchains }}
-        shell: pwsh
         run: |
           mkdir '${{ env.archiveName }}'
           cp build/src/release/${{ env.targetName }}'.exe' ${{ env.archiveName }}/
