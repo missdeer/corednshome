@@ -48,13 +48,80 @@ bool relaunch_as_root()
 }
 #endif
 
+QStringList sortUILanguages(const QStringList &languages)
+{
+    QStringList sortedLanguages;
+    QStringList englishLanguages;
+
+    for (const QString &lang : languages)
+    {
+        if (lang.startsWith(QStringLiteral("en")))
+        {
+            englishLanguages << lang;
+        }
+        else
+        {
+            sortedLanguages << lang;
+        }
+    }
+
+    sortedLanguages << englishLanguages;
+    return sortedLanguages;
+}
+
+void installTranslator(QTranslator &translator, QTranslator &qtTranslator)
+{
+    QDir translationDir(QCoreApplication::applicationDirPath());
+#if defined(Q_OS_MAC)
+    translationDir.cdUp();
+    translationDir.cd(QStringLiteral("Resources"));
+#endif
+    translationDir.cd(QStringLiteral("translations"));
+
+    const QStringList uiLanguages = sortUILanguages(QLocale::system().uiLanguages());
+    for (const auto &locale : uiLanguages)
+    {
+        QString qmFileName = QStringLiteral("corednshome_%1.qm").arg(locale).replace('-', '_');
+        if (translator.load(qmFileName, translationDir.absolutePath()))
+        {
+            QApplication::installTranslator(&translator);
+
+            qDebug() << "all ui languages:" << uiLanguages << ", locale:" << locale << ", use qm file name:" << qmFileName;
+            if (qtTranslator.load(QStringLiteral("qt_%1.qm").arg(locale).replace('-', '_'), translationDir.absolutePath()))
+            {
+                QApplication::installTranslator(&qtTranslator);
+            }
+            return;
+        }
+
+        qDebug() << "no translation file is matched for " << locale << " from " << translationDir.absolutePath();
+    }
+    for (const auto &locale : uiLanguages)
+    {
+        QString qmFileName = QStringLiteral("corednshome_%1.qm").arg(QLocale(locale).name()).replace('-', '_');
+        if (translator.load(qmFileName, translationDir.absolutePath()))
+        {
+            QApplication::installTranslator(&translator);
+
+            qDebug() << "all ui languages:" << uiLanguages << ", locale:" << QLocale(locale).name() << ", use qm file name:" << qmFileName;
+            if (qtTranslator.load(QStringLiteral("qt_%1.qm").arg(QLocale(locale).name()).replace('-', '_'), translationDir.absolutePath()))
+            {
+                QApplication::installTranslator(&qtTranslator);
+            }
+            return;
+        }
+
+        qDebug() << "no translation file is matched for " << locale << " from " << translationDir.absolutePath();
+    }
+}
+
 int main(int argc, char *argv[])
 {
 #ifndef Q_OS_WIN
     QCoreApplication::setSetuidAllowed(true);
 #endif
     QCoreApplication::setOrganizationName(QLatin1String("minidump.info"));
-    QCoreApplication::setApplicationName("CoreDNS-Home");
+    QCoreApplication::setApplicationName("CoreDNSHome");
     QCoreApplication::setApplicationVersion(QLatin1String("1.0"));
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
@@ -82,51 +149,10 @@ int main(int argc, char *argv[])
             nullptr, QObject::tr("Critical error"), QObject::tr("SSL not supported, some features may stop working."), QMessageBox::Ok);
     }
 
-    QString     locale = QLocale().uiLanguages()[0];
     QTranslator translator;
     QTranslator qtTranslator;
-
-    // main application and dynamic linked library locale
-#if defined(Q_OS_MAC)
-    QString localeDirPath = QApplication::applicationDirPath() + "/../Resources/translations";
-#else
-    QString localeDirPath = QApplication::applicationDirPath() + "/translations";
-    if (!QDir(localeDirPath).exists())
-    {
-        localeDirPath = QApplication::applicationDirPath() + "/../translations";
-    }
-#endif
-
-    if (!translator.load("corednshome_" + locale, localeDirPath))
-    {
-        qDebug() << "loading "
-                 << "corednshome_" + locale << " from " << localeDirPath << " failed";
-    }
-    else
-    {
-        qDebug() << "loading "
-                 << "corednshome_" + locale << " from " << localeDirPath << " success";
-        if (!a.installTranslator(&translator))
-        {
-            qDebug() << "installing corednshome translator failed ";
-        }
-    }
-
-    // qt locale
-    if (!qtTranslator.load("qt_" + locale, localeDirPath))
-    {
-        qDebug() << "loading "
-                 << "qt_" + locale << " from " << localeDirPath << " failed";
-    }
-    else
-    {
-        qDebug() << "loading "
-                 << "qt_" + locale << " from " << localeDirPath << " success";
-        if (!a.installTranslator(&qtTranslator))
-        {
-            qDebug() << "installing qt translator failed ";
-        }
-    }
+    installTranslator(translator, qtTranslator);
+    
     Settings settings;
     g_settings = &settings;
     g_settings->initialize();
